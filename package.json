@@ -1,0 +1,17 @@
+{
+	"name": "derelict-purple",
+	"description": "Dynamic bindings to (lib)purple for the D Programming Language.",
+	"homepage": "https://github.com/PaulFreund/DerelictPurple",
+	"license": "Boost",
+	"authors": [
+		"Paul Freund"
+	],
+	
+	"targetName": "DerelictPurple",
+	"targetPath": "lib",
+	
+	"dependencies": {
+		"derelict-glib" : "~master",
+		"derelict-util" : "~master"
+	}
+}
