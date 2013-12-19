@@ -77,36 +77,58 @@ struct _Anonymous_0
 struct _PurpleSrvTxtQueryData;
 																													
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-	alias da_purple_srv_resolve_account = PurpleSrvTxtQueryData* function(PurpleAccount* account, const(char)* protocol, const(char)* transport, const(char)* domain, PurpleSrvCallback cb, gpointer extradata);		
-    alias da_purple_srv_resolve = PurpleSrvTxtQueryData* function(const(char)* protocol, const(char)* transport, const(char)* domain, PurpleSrvCallback cb, gpointer extradata);										
-    alias da_purple_srv_cancel = void function(PurpleSrvTxtQueryData* query_data);																																		
-    alias da_purple_txt_resolve_account = PurpleSrvTxtQueryData* function(PurpleAccount* account, const(char)* owner, const(char)* domain, PurpleTxtCallback cb, gpointer extradata);									
-    alias da_purple_txt_resolve = PurpleSrvTxtQueryData* function(const(char)* owner, const(char)* domain, PurpleTxtCallback cb, gpointer extradata);																	
-    alias da_purple_txt_cancel = void function(PurpleSrvTxtQueryData* query_data);																																		
-    alias da_purple_txt_response_get_content = const(gchar)* function(PurpleTxtResponse* response);																														
-    alias da_purple_txt_response_destroy = void function(PurpleTxtResponse* response);																																	
-    alias da_purple_srv_txt_query_destroy = void function(PurpleSrvTxtQueryData* query_data);																															
-    alias da_purple_srv_txt_query_set_ui_ops = void function(PurpleSrvTxtQueryUiOps* ops);																																
-    alias da_purple_srv_txt_query_get_ui_ops = PurpleSrvTxtQueryUiOps* function();																																		
-    alias da_purple_srv_txt_query_get_query = char* function(PurpleSrvTxtQueryData* query_data);																														
-    alias da_purple_srv_txt_query_get_type = int function(PurpleSrvTxtQueryData* query_data);	
+    extern( C ) nothrow 
+    {
+	    PurpleSrvTxtQueryData* purple_srv_resolve_account(PurpleAccount* account, const(char)* protocol, const(char)* transport, const(char)* domain, PurpleSrvCallback cb, gpointer extradata);
+        PurpleSrvTxtQueryData* purple_srv_resolve(const(char)* protocol, const(char)* transport, const(char)* domain, PurpleSrvCallback cb, gpointer extradata);
+        void purple_srv_cancel(PurpleSrvTxtQueryData* query_data);
+        PurpleSrvTxtQueryData* purple_txt_resolve_account(PurpleAccount* account, const(char)* owner, const(char)* domain, PurpleTxtCallback cb, gpointer extradata);
+        PurpleSrvTxtQueryData* purple_txt_resolve(const(char)* owner, const(char)* domain, PurpleTxtCallback cb, gpointer extradata);
+        void purple_txt_cancel(PurpleSrvTxtQueryData* query_data);
+        const(gchar)* purple_txt_response_get_content(PurpleTxtResponse* response);
+        void purple_txt_response_destroy(PurpleTxtResponse* response);
+        void purple_srv_txt_query_destroy(PurpleSrvTxtQueryData* query_data);
+        void purple_srv_txt_query_set_ui_ops(PurpleSrvTxtQueryUiOps* ops);
+        PurpleSrvTxtQueryUiOps* purple_srv_txt_query_get_ui_ops();
+        char* purple_srv_txt_query_get_query(PurpleSrvTxtQueryData* query_data);
+        int purple_srv_txt_query_get_type(PurpleSrvTxtQueryData* query_data);
+    }
 }
-
-__gshared
+else
 {
-	da_purple_srv_resolve_account purple_srv_resolve_account;
-	da_purple_srv_resolve purple_srv_resolve;
-	da_purple_srv_cancel purple_srv_cancel;
-	da_purple_txt_resolve_account purple_txt_resolve_account;
-	da_purple_txt_resolve purple_txt_resolve;
-	da_purple_txt_cancel purple_txt_cancel;
-	da_purple_txt_response_get_content purple_txt_response_get_content;
-	da_purple_txt_response_destroy purple_txt_response_destroy;
-	da_purple_srv_txt_query_destroy purple_srv_txt_query_destroy;
-	da_purple_srv_txt_query_set_ui_ops purple_srv_txt_query_set_ui_ops;
-	da_purple_srv_txt_query_get_ui_ops purple_srv_txt_query_get_ui_ops;
-	da_purple_srv_txt_query_get_query purple_srv_txt_query_get_query;
-	da_purple_srv_txt_query_get_type purple_srv_txt_query_get_type;
+    extern( C ) nothrow 
+    {
+	    alias da_purple_srv_resolve_account = PurpleSrvTxtQueryData* function(PurpleAccount* account, const(char)* protocol, const(char)* transport, const(char)* domain, PurpleSrvCallback cb, gpointer extradata);		
+        alias da_purple_srv_resolve = PurpleSrvTxtQueryData* function(const(char)* protocol, const(char)* transport, const(char)* domain, PurpleSrvCallback cb, gpointer extradata);										
+        alias da_purple_srv_cancel = void function(PurpleSrvTxtQueryData* query_data);																																		
+        alias da_purple_txt_resolve_account = PurpleSrvTxtQueryData* function(PurpleAccount* account, const(char)* owner, const(char)* domain, PurpleTxtCallback cb, gpointer extradata);									
+        alias da_purple_txt_resolve = PurpleSrvTxtQueryData* function(const(char)* owner, const(char)* domain, PurpleTxtCallback cb, gpointer extradata);																	
+        alias da_purple_txt_cancel = void function(PurpleSrvTxtQueryData* query_data);																																		
+        alias da_purple_txt_response_get_content = const(gchar)* function(PurpleTxtResponse* response);																														
+        alias da_purple_txt_response_destroy = void function(PurpleTxtResponse* response);																																	
+        alias da_purple_srv_txt_query_destroy = void function(PurpleSrvTxtQueryData* query_data);																															
+        alias da_purple_srv_txt_query_set_ui_ops = void function(PurpleSrvTxtQueryUiOps* ops);																																
+        alias da_purple_srv_txt_query_get_ui_ops = PurpleSrvTxtQueryUiOps* function();																																		
+        alias da_purple_srv_txt_query_get_query = char* function(PurpleSrvTxtQueryData* query_data);																														
+        alias da_purple_srv_txt_query_get_type = int function(PurpleSrvTxtQueryData* query_data);	
+    }
+
+    __gshared
+    {
+	    da_purple_srv_resolve_account purple_srv_resolve_account;
+	    da_purple_srv_resolve purple_srv_resolve;
+	    da_purple_srv_cancel purple_srv_cancel;
+	    da_purple_txt_resolve_account purple_txt_resolve_account;
+	    da_purple_txt_resolve purple_txt_resolve;
+	    da_purple_txt_cancel purple_txt_cancel;
+	    da_purple_txt_response_get_content purple_txt_response_get_content;
+	    da_purple_txt_response_destroy purple_txt_response_destroy;
+	    da_purple_srv_txt_query_destroy purple_srv_txt_query_destroy;
+	    da_purple_srv_txt_query_set_ui_ops purple_srv_txt_query_set_ui_ops;
+	    da_purple_srv_txt_query_get_ui_ops purple_srv_txt_query_get_ui_ops;
+	    da_purple_srv_txt_query_get_query purple_srv_txt_query_get_query;
+	    da_purple_srv_txt_query_get_type purple_srv_txt_query_get_type;
+    }
 }

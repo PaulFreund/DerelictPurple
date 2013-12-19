@@ -40,58 +40,91 @@ alias void function (int, void*) PurpleNetworkListenCallback;
 struct _PurpleNetworkListenData;
 
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-	alias da_purple_network_ip_atoi = const(ubyte)* function(const(char)* ip);																																
-    alias da_purple_network_set_public_ip = void function(const(char)* ip);																																	
-    alias da_purple_network_get_public_ip = const(char)* function();																																		
-    alias da_purple_network_get_local_system_ip = const(char)* function(int fd);																															
-    alias da_purple_network_get_all_local_system_ips = GList* function();																																	
-    alias da_purple_network_get_my_ip = const(char)* function(int fd);																																		
-    alias da_purple_network_listen_map_external = void function(gboolean map_external);																														
-    alias da_purple_network_listen = PurpleNetworkListenData* function(ushort port, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);														
-    alias da_purple_network_listen_family = PurpleNetworkListenData* function(ushort port, int socket_family, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);							
-    alias da_purple_network_listen_range = PurpleNetworkListenData* function(ushort start, ushort end, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);									
-    alias da_purple_network_listen_range_family = PurpleNetworkListenData* function(ushort start, ushort end, int socket_family, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);		
-    alias da_purple_network_listen_cancel = void function(PurpleNetworkListenData* listen_data);																											
-    alias da_purple_network_get_port_from_fd = ushort function(int fd);																																		
-    alias da_purple_network_is_available = gboolean function();																																				
-    alias da_purple_network_force_online = void function();																																					
-    alias da_purple_network_get_handle = void* function();																																					
-    alias da_purple_network_set_stun_server = void function(const(gchar)* stun_server);																														
-    alias da_purple_network_get_stun_ip = const(gchar)* function();																																			
-    alias da_purple_network_set_turn_server = void function(const(gchar)* turn_server);																														
-    alias da_purple_network_get_turn_ip = const(gchar)* function();																																			
-    alias da_purple_network_remove_port_mapping = void function(gint fd);																																	
-    alias da_purple_network_convert_idn_to_ascii = int function(const(gchar)* in_, gchar** out_);																											
-    alias da_purple_network_init = void function();																																							
-    alias da_purple_network_uninit = void function();	
+    extern( C ) nothrow 
+    {
+	    const(ubyte)* purple_network_ip_atoi(const(char)* ip);
+        void purple_network_set_public_ip(const(char)* ip);
+        const(char)* purple_network_get_public_ip();
+        const(char)* purple_network_get_local_system_ip(int fd);
+        GList* purple_network_get_all_local_system_ips();
+        const(char)* purple_network_get_my_ip(int fd);
+        void purple_network_listen_map_external(gboolean map_external);
+        PurpleNetworkListenData* purple_network_listen(ushort port, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);
+        PurpleNetworkListenData* purple_network_listen_family(ushort port, int socket_family, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);
+        PurpleNetworkListenData* purple_network_listen_range(ushort start, ushort end, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);
+        PurpleNetworkListenData* purple_network_listen_range_family(ushort start, ushort end, int socket_family, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);
+        void purple_network_listen_cancel(PurpleNetworkListenData* listen_data);
+        ushort purple_network_get_port_from_fd(int fd);
+        gboolean purple_network_is_available();
+        void purple_network_force_online();
+        void* purple_network_get_handle();
+        void purple_network_set_stun_server(const(gchar)* stun_server);
+        const(gchar)* purple_network_get_stun_ip();
+        void purple_network_set_turn_server(const(gchar)* turn_server);
+        const(gchar)* purple_network_get_turn_ip();
+        void purple_network_remove_port_mapping(gint fd);
+        int purple_network_convert_idn_to_ascii(const(gchar)* in_, gchar** out_);
+        void purple_network_init();
+        void purple_network_uninit();
+    }
 }
-
-__gshared
+else
 {
-	da_purple_network_ip_atoi purple_network_ip_atoi;
-	da_purple_network_set_public_ip purple_network_set_public_ip;
-	da_purple_network_get_public_ip purple_network_get_public_ip;
-	da_purple_network_get_local_system_ip purple_network_get_local_system_ip;
-	da_purple_network_get_all_local_system_ips purple_network_get_all_local_system_ips;
-	da_purple_network_get_my_ip purple_network_get_my_ip;
-	da_purple_network_listen_map_external purple_network_listen_map_external;
-	da_purple_network_listen purple_network_listen;
-	da_purple_network_listen_family purple_network_listen_family;
-	da_purple_network_listen_range purple_network_listen_range;
-	da_purple_network_listen_range_family purple_network_listen_range_family;
-	da_purple_network_listen_cancel purple_network_listen_cancel;
-	da_purple_network_get_port_from_fd purple_network_get_port_from_fd;
-	da_purple_network_is_available purple_network_is_available;
-	da_purple_network_force_online purple_network_force_online;
-	da_purple_network_get_handle purple_network_get_handle;
-	da_purple_network_set_stun_server purple_network_set_stun_server;
-	da_purple_network_get_stun_ip purple_network_get_stun_ip;
-	da_purple_network_set_turn_server purple_network_set_turn_server;
-	da_purple_network_get_turn_ip purple_network_get_turn_ip;
-	da_purple_network_remove_port_mapping purple_network_remove_port_mapping;
-	da_purple_network_convert_idn_to_ascii purple_network_convert_idn_to_ascii;
-	da_purple_network_init purple_network_init;
-	da_purple_network_uninit purple_network_uninit;
+    extern( C ) nothrow 
+    {
+	    alias da_purple_network_ip_atoi = const(ubyte)* function(const(char)* ip);																																
+        alias da_purple_network_set_public_ip = void function(const(char)* ip);																																	
+        alias da_purple_network_get_public_ip = const(char)* function();																																		
+        alias da_purple_network_get_local_system_ip = const(char)* function(int fd);																															
+        alias da_purple_network_get_all_local_system_ips = GList* function();																																	
+        alias da_purple_network_get_my_ip = const(char)* function(int fd);																																		
+        alias da_purple_network_listen_map_external = void function(gboolean map_external);																														
+        alias da_purple_network_listen = PurpleNetworkListenData* function(ushort port, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);														
+        alias da_purple_network_listen_family = PurpleNetworkListenData* function(ushort port, int socket_family, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);							
+        alias da_purple_network_listen_range = PurpleNetworkListenData* function(ushort start, ushort end, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);									
+        alias da_purple_network_listen_range_family = PurpleNetworkListenData* function(ushort start, ushort end, int socket_family, int socket_type, PurpleNetworkListenCallback cb, gpointer cb_data);		
+        alias da_purple_network_listen_cancel = void function(PurpleNetworkListenData* listen_data);																											
+        alias da_purple_network_get_port_from_fd = ushort function(int fd);																																		
+        alias da_purple_network_is_available = gboolean function();																																				
+        alias da_purple_network_force_online = void function();																																					
+        alias da_purple_network_get_handle = void* function();																																					
+        alias da_purple_network_set_stun_server = void function(const(gchar)* stun_server);																														
+        alias da_purple_network_get_stun_ip = const(gchar)* function();																																			
+        alias da_purple_network_set_turn_server = void function(const(gchar)* turn_server);																														
+        alias da_purple_network_get_turn_ip = const(gchar)* function();																																			
+        alias da_purple_network_remove_port_mapping = void function(gint fd);																																	
+        alias da_purple_network_convert_idn_to_ascii = int function(const(gchar)* in_, gchar** out_);																											
+        alias da_purple_network_init = void function();																																							
+        alias da_purple_network_uninit = void function();	
+    }
+
+    __gshared
+    {
+	    da_purple_network_ip_atoi purple_network_ip_atoi;
+	    da_purple_network_set_public_ip purple_network_set_public_ip;
+	    da_purple_network_get_public_ip purple_network_get_public_ip;
+	    da_purple_network_get_local_system_ip purple_network_get_local_system_ip;
+	    da_purple_network_get_all_local_system_ips purple_network_get_all_local_system_ips;
+	    da_purple_network_get_my_ip purple_network_get_my_ip;
+	    da_purple_network_listen_map_external purple_network_listen_map_external;
+	    da_purple_network_listen purple_network_listen;
+	    da_purple_network_listen_family purple_network_listen_family;
+	    da_purple_network_listen_range purple_network_listen_range;
+	    da_purple_network_listen_range_family purple_network_listen_range_family;
+	    da_purple_network_listen_cancel purple_network_listen_cancel;
+	    da_purple_network_get_port_from_fd purple_network_get_port_from_fd;
+	    da_purple_network_is_available purple_network_is_available;
+	    da_purple_network_force_online purple_network_force_online;
+	    da_purple_network_get_handle purple_network_get_handle;
+	    da_purple_network_set_stun_server purple_network_set_stun_server;
+	    da_purple_network_get_stun_ip purple_network_get_stun_ip;
+	    da_purple_network_set_turn_server purple_network_set_turn_server;
+	    da_purple_network_get_turn_ip purple_network_get_turn_ip;
+	    da_purple_network_remove_port_mapping purple_network_remove_port_mapping;
+	    da_purple_network_convert_idn_to_ascii purple_network_convert_idn_to_ascii;
+	    da_purple_network_init purple_network_init;
+	    da_purple_network_uninit purple_network_uninit;
+    }
 }

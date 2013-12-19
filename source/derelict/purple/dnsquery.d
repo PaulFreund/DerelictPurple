@@ -53,28 +53,46 @@ struct _Anonymous_0
 
 struct _PurpleDnsQueryData;
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_purple_dnsquery_a_account = PurpleDnsQueryData* function(PurpleAccount* account, const(char)* hostname, int port, PurpleDnsQueryConnectFunction callback, gpointer data);		
-    alias da_purple_dnsquery_a = PurpleDnsQueryData* function(const(char)* hostname, int port, PurpleDnsQueryConnectFunction callback, gpointer data);										
-    alias da_purple_dnsquery_destroy = void function(PurpleDnsQueryData* query_data);																										
-    alias da_purple_dnsquery_set_ui_ops = void function(PurpleDnsQueryUiOps* ops);																											
-    alias da_purple_dnsquery_get_ui_ops = PurpleDnsQueryUiOps* function();																													
-    alias da_purple_dnsquery_get_host = char* function(PurpleDnsQueryData* query_data);																										
-    alias da_purple_dnsquery_get_port = ushort function(PurpleDnsQueryData* query_data);																									
-    alias da_purple_dnsquery_init = void function();																																		
-    alias da_purple_dnsquery_uninit = void function();		
+    extern( C ) nothrow 
+    {
+        PurpleDnsQueryData* purple_dnsquery_a_account(PurpleAccount* account, const(char)* hostname, int port, PurpleDnsQueryConnectFunction callback, gpointer data);
+        PurpleDnsQueryData* purple_dnsquery_a(const(char)* hostname, int port, PurpleDnsQueryConnectFunction callback, gpointer data);
+        void purple_dnsquery_destroy(PurpleDnsQueryData* query_data);
+        void purple_dnsquery_set_ui_ops(PurpleDnsQueryUiOps* ops);
+        PurpleDnsQueryUiOps* purple_dnsquery_get_ui_ops();
+        char* purple_dnsquery_get_host(PurpleDnsQueryData* query_data);
+        ushort purple_dnsquery_get_port(PurpleDnsQueryData* query_data);
+        void purple_dnsquery_init();
+        void purple_dnsquery_uninit();
+    }
 }
-
-__gshared
+else
 {
-	da_purple_dnsquery_a_account purple_dnsquery_a_account;
-	da_purple_dnsquery_a purple_dnsquery_a;
-	da_purple_dnsquery_destroy purple_dnsquery_destroy;
-	da_purple_dnsquery_set_ui_ops purple_dnsquery_set_ui_ops;
-	da_purple_dnsquery_get_ui_ops purple_dnsquery_get_ui_ops;
-	da_purple_dnsquery_get_host purple_dnsquery_get_host;
-	da_purple_dnsquery_get_port purple_dnsquery_get_port;
-	da_purple_dnsquery_init purple_dnsquery_init;
-	da_purple_dnsquery_uninit purple_dnsquery_uninit;
+    extern( C ) nothrow 
+    {
+        alias da_purple_dnsquery_a_account = PurpleDnsQueryData* function(PurpleAccount* account, const(char)* hostname, int port, PurpleDnsQueryConnectFunction callback, gpointer data);		
+        alias da_purple_dnsquery_a = PurpleDnsQueryData* function(const(char)* hostname, int port, PurpleDnsQueryConnectFunction callback, gpointer data);										
+        alias da_purple_dnsquery_destroy = void function(PurpleDnsQueryData* query_data);																										
+        alias da_purple_dnsquery_set_ui_ops = void function(PurpleDnsQueryUiOps* ops);																											
+        alias da_purple_dnsquery_get_ui_ops = PurpleDnsQueryUiOps* function();																													
+        alias da_purple_dnsquery_get_host = char* function(PurpleDnsQueryData* query_data);																										
+        alias da_purple_dnsquery_get_port = ushort function(PurpleDnsQueryData* query_data);																									
+        alias da_purple_dnsquery_init = void function();																																		
+        alias da_purple_dnsquery_uninit = void function();		
+    }
+
+    __gshared
+    {
+	    da_purple_dnsquery_a_account purple_dnsquery_a_account;
+	    da_purple_dnsquery_a purple_dnsquery_a;
+	    da_purple_dnsquery_destroy purple_dnsquery_destroy;
+	    da_purple_dnsquery_set_ui_ops purple_dnsquery_set_ui_ops;
+	    da_purple_dnsquery_get_ui_ops purple_dnsquery_get_ui_ops;
+	    da_purple_dnsquery_get_host purple_dnsquery_get_host;
+	    da_purple_dnsquery_get_port purple_dnsquery_get_port;
+	    da_purple_dnsquery_init purple_dnsquery_init;
+	    da_purple_dnsquery_uninit purple_dnsquery_uninit;
+    }
 }

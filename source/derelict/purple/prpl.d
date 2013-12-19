@@ -192,66 +192,103 @@ struct _PurpleThumbnailSpec;
 
 
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_purple_attention_type_new = PurpleAttentionType* function(const(char)* ulname, const(char)* name, const(char)* inc_desc, const(char)* out_desc);			
-    alias da_purple_attention_type_set_name = void function(PurpleAttentionType* type, const(char)* name);																
-    alias da_purple_attention_type_set_incoming_desc = void function(PurpleAttentionType* type, const(char)* desc);														
-    alias da_purple_attention_type_set_outgoing_desc = void function(PurpleAttentionType* type, const(char)* desc);														
-    alias da_purple_attention_type_set_icon_name = void function(PurpleAttentionType* type, const(char)* name);															
-    alias da_purple_attention_type_set_unlocalized_name = void function(PurpleAttentionType* type, const(char)* ulname);												
-    alias da_purple_attention_type_get_name = const(char)* function(const(PurpleAttentionType)* type);																	
-    alias da_purple_attention_type_get_incoming_desc = const(char)* function(const(PurpleAttentionType)* type);															
-    alias da_purple_attention_type_get_outgoing_desc = const(char)* function(const(PurpleAttentionType)* type);															
-    alias da_purple_attention_type_get_icon_name = const(char)* function(const(PurpleAttentionType)* type);																
-    alias da_purple_attention_type_get_unlocalized_name = const(char)* function(const(PurpleAttentionType)* type);														
-    alias da_purple_prpl_got_account_idle = void function(PurpleAccount* account, gboolean idle, time_t idle_time);														
-    alias da_purple_prpl_got_account_login_time = void function(PurpleAccount* account, time_t login_time);																
-    alias da_purple_prpl_got_account_status = void function(PurpleAccount* account, const(char)* status_id, ...);														
-    alias da_purple_prpl_got_account_actions = void function(PurpleAccount* account);																					
-    alias da_purple_prpl_got_user_idle = void function(PurpleAccount* account, const(char)* name, gboolean idle, time_t idle_time);										
-    alias da_purple_prpl_got_user_login_time = void function(PurpleAccount* account, const(char)* name, time_t login_time);												
-    alias da_purple_prpl_got_user_status = void function(PurpleAccount* account, const(char)* name, const(char)* status_id, ...);										
-    alias da_purple_prpl_got_user_status_deactive = void function(PurpleAccount* account, const(char)* name, const(char)* status_id);									
-    alias da_purple_prpl_change_account_status = void function(PurpleAccount* account, PurpleStatus* old_status, PurpleStatus* new_status);								
-    alias da_purple_prpl_get_statuses = GList* function(PurpleAccount* account, PurplePresence* presence);																
-    alias da_purple_prpl_send_attention = void function(PurpleConnection* gc, const(char)* who, guint type_code);														
-    alias da_purple_prpl_got_attention = void function(PurpleConnection* gc, const(char)* who, guint type_code);														
-    alias da_purple_prpl_got_attention_in_chat = void function(PurpleConnection* gc, int id, const(char)* who, guint type_code);										
-    alias da_purple_prpl_get_media_caps = PurpleMediaCaps function(PurpleAccount* account, const(char)* who);															
-    alias da_purple_prpl_initiate_media = gboolean function(PurpleAccount* account, const(char)* who, PurpleMediaSessionType type);										
-    alias da_purple_prpl_got_media_caps = void function(PurpleAccount* account, const(char)* who);																		
-    alias da_purple_find_prpl = PurplePlugin* function(const(char)* id);	
+    extern( C ) nothrow 
+    {
+        PurpleAttentionType* purple_attention_type_new(const(char)* ulname, const(char)* name, const(char)* inc_desc, const(char)* out_desc);
+        void purple_attention_type_set_name(PurpleAttentionType* type, const(char)* name);
+        void purple_attention_type_set_incoming_desc(PurpleAttentionType* type, const(char)* desc);
+        void purple_attention_type_set_outgoing_desc(PurpleAttentionType* type, const(char)* desc);
+        void purple_attention_type_set_icon_name(PurpleAttentionType* type, const(char)* name);
+        void purple_attention_type_set_unlocalized_name(PurpleAttentionType* type, const(char)* ulname);
+        const(char)* purple_attention_type_get_name(const(PurpleAttentionType)* type);
+        const(char)* purple_attention_type_get_incoming_desc(const(PurpleAttentionType)* type);
+        const(char)* purple_attention_type_get_outgoing_desc(const(PurpleAttentionType)* type);
+        const(char)* purple_attention_type_get_icon_name(const(PurpleAttentionType)* type);
+        const(char)* purple_attention_type_get_unlocalized_name(const(PurpleAttentionType)* type);
+        void purple_prpl_got_account_idle(PurpleAccount* account, gboolean idle, time_t idle_time);
+        void purple_prpl_got_account_login_time(PurpleAccount* account, time_t login_time);
+        void purple_prpl_got_account_status(PurpleAccount* account, const(char)* status_id, ...);
+        void purple_prpl_got_account_actions(PurpleAccount* account);
+        void purple_prpl_got_user_idle(PurpleAccount* account, const(char)* name, gboolean idle, time_t idle_time);
+        void purple_prpl_got_user_login_time(PurpleAccount* account, const(char)* name, time_t login_time);
+        void purple_prpl_got_user_status(PurpleAccount* account, const(char)* name, const(char)* status_id, ...);
+        void purple_prpl_got_user_status_deactive(PurpleAccount* account, const(char)* name, const(char)* status_id);
+        void purple_prpl_change_account_status(PurpleAccount* account, PurpleStatus* old_status, PurpleStatus* new_status);
+        GList* purple_prpl_get_statuses(PurpleAccount* account, PurplePresence* presence);
+        void purple_prpl_send_attention(PurpleConnection* gc, const(char)* who, guint type_code);
+        void purple_prpl_got_attention(PurpleConnection* gc, const(char)* who, guint type_code);
+        void purple_prpl_got_attention_in_chat(PurpleConnection* gc, int id, const(char)* who, guint type_code);
+        PurpleMediaCaps purple_prpl_get_media_caps(PurpleAccount* account, const(char)* who);
+        gboolean purple_prpl_initiate_media(PurpleAccount* account, const(char)* who, PurpleMediaSessionType type);
+        void purple_prpl_got_media_caps(PurpleAccount* account, const(char)* who);
+        PurplePlugin* purple_find_prpl(const(char)* id);
+    }
 }
-
-__gshared
+else
 {
-	da_purple_attention_type_new purple_attention_type_new;
-	da_purple_attention_type_set_name purple_attention_type_set_name;
-	da_purple_attention_type_set_incoming_desc purple_attention_type_set_incoming_desc;
-	da_purple_attention_type_set_outgoing_desc purple_attention_type_set_outgoing_desc;
-	da_purple_attention_type_set_icon_name purple_attention_type_set_icon_name;
-	da_purple_attention_type_set_unlocalized_name purple_attention_type_set_unlocalized_name;
-	da_purple_attention_type_get_name purple_attention_type_get_name;
-	da_purple_attention_type_get_incoming_desc purple_attention_type_get_incoming_desc;
-	da_purple_attention_type_get_outgoing_desc purple_attention_type_get_outgoing_desc;
-	da_purple_attention_type_get_icon_name purple_attention_type_get_icon_name;
-	da_purple_attention_type_get_unlocalized_name purple_attention_type_get_unlocalized_name;
-	da_purple_prpl_got_account_idle purple_prpl_got_account_idle;
-	da_purple_prpl_got_account_login_time purple_prpl_got_account_login_time;
-	da_purple_prpl_got_account_status purple_prpl_got_account_status;
-	da_purple_prpl_got_account_actions purple_prpl_got_account_actions;
-	da_purple_prpl_got_user_idle purple_prpl_got_user_idle;
-	da_purple_prpl_got_user_login_time purple_prpl_got_user_login_time;
-	da_purple_prpl_got_user_status purple_prpl_got_user_status;
-	da_purple_prpl_got_user_status_deactive purple_prpl_got_user_status_deactive;
-	da_purple_prpl_change_account_status purple_prpl_change_account_status;
-	da_purple_prpl_get_statuses purple_prpl_get_statuses;
-	da_purple_prpl_send_attention purple_prpl_send_attention;
-	da_purple_prpl_got_attention purple_prpl_got_attention;
-	da_purple_prpl_got_attention_in_chat purple_prpl_got_attention_in_chat;
-	da_purple_prpl_get_media_caps purple_prpl_get_media_caps;
-	da_purple_prpl_initiate_media purple_prpl_initiate_media;
-	da_purple_prpl_got_media_caps purple_prpl_got_media_caps;
-	da_purple_find_prpl purple_find_prpl;
+    extern( C ) nothrow 
+    {
+        alias da_purple_attention_type_new = PurpleAttentionType* function(const(char)* ulname, const(char)* name, const(char)* inc_desc, const(char)* out_desc);			
+        alias da_purple_attention_type_set_name = void function(PurpleAttentionType* type, const(char)* name);																
+        alias da_purple_attention_type_set_incoming_desc = void function(PurpleAttentionType* type, const(char)* desc);														
+        alias da_purple_attention_type_set_outgoing_desc = void function(PurpleAttentionType* type, const(char)* desc);														
+        alias da_purple_attention_type_set_icon_name = void function(PurpleAttentionType* type, const(char)* name);															
+        alias da_purple_attention_type_set_unlocalized_name = void function(PurpleAttentionType* type, const(char)* ulname);												
+        alias da_purple_attention_type_get_name = const(char)* function(const(PurpleAttentionType)* type);																	
+        alias da_purple_attention_type_get_incoming_desc = const(char)* function(const(PurpleAttentionType)* type);															
+        alias da_purple_attention_type_get_outgoing_desc = const(char)* function(const(PurpleAttentionType)* type);															
+        alias da_purple_attention_type_get_icon_name = const(char)* function(const(PurpleAttentionType)* type);																
+        alias da_purple_attention_type_get_unlocalized_name = const(char)* function(const(PurpleAttentionType)* type);														
+        alias da_purple_prpl_got_account_idle = void function(PurpleAccount* account, gboolean idle, time_t idle_time);														
+        alias da_purple_prpl_got_account_login_time = void function(PurpleAccount* account, time_t login_time);																
+        alias da_purple_prpl_got_account_status = void function(PurpleAccount* account, const(char)* status_id, ...);														
+        alias da_purple_prpl_got_account_actions = void function(PurpleAccount* account);																					
+        alias da_purple_prpl_got_user_idle = void function(PurpleAccount* account, const(char)* name, gboolean idle, time_t idle_time);										
+        alias da_purple_prpl_got_user_login_time = void function(PurpleAccount* account, const(char)* name, time_t login_time);												
+        alias da_purple_prpl_got_user_status = void function(PurpleAccount* account, const(char)* name, const(char)* status_id, ...);										
+        alias da_purple_prpl_got_user_status_deactive = void function(PurpleAccount* account, const(char)* name, const(char)* status_id);									
+        alias da_purple_prpl_change_account_status = void function(PurpleAccount* account, PurpleStatus* old_status, PurpleStatus* new_status);								
+        alias da_purple_prpl_get_statuses = GList* function(PurpleAccount* account, PurplePresence* presence);																
+        alias da_purple_prpl_send_attention = void function(PurpleConnection* gc, const(char)* who, guint type_code);														
+        alias da_purple_prpl_got_attention = void function(PurpleConnection* gc, const(char)* who, guint type_code);														
+        alias da_purple_prpl_got_attention_in_chat = void function(PurpleConnection* gc, int id, const(char)* who, guint type_code);										
+        alias da_purple_prpl_get_media_caps = PurpleMediaCaps function(PurpleAccount* account, const(char)* who);															
+        alias da_purple_prpl_initiate_media = gboolean function(PurpleAccount* account, const(char)* who, PurpleMediaSessionType type);										
+        alias da_purple_prpl_got_media_caps = void function(PurpleAccount* account, const(char)* who);																		
+        alias da_purple_find_prpl = PurplePlugin* function(const(char)* id);	
+    }
+
+    __gshared
+    {
+	    da_purple_attention_type_new purple_attention_type_new;
+	    da_purple_attention_type_set_name purple_attention_type_set_name;
+	    da_purple_attention_type_set_incoming_desc purple_attention_type_set_incoming_desc;
+	    da_purple_attention_type_set_outgoing_desc purple_attention_type_set_outgoing_desc;
+	    da_purple_attention_type_set_icon_name purple_attention_type_set_icon_name;
+	    da_purple_attention_type_set_unlocalized_name purple_attention_type_set_unlocalized_name;
+	    da_purple_attention_type_get_name purple_attention_type_get_name;
+	    da_purple_attention_type_get_incoming_desc purple_attention_type_get_incoming_desc;
+	    da_purple_attention_type_get_outgoing_desc purple_attention_type_get_outgoing_desc;
+	    da_purple_attention_type_get_icon_name purple_attention_type_get_icon_name;
+	    da_purple_attention_type_get_unlocalized_name purple_attention_type_get_unlocalized_name;
+	    da_purple_prpl_got_account_idle purple_prpl_got_account_idle;
+	    da_purple_prpl_got_account_login_time purple_prpl_got_account_login_time;
+	    da_purple_prpl_got_account_status purple_prpl_got_account_status;
+	    da_purple_prpl_got_account_actions purple_prpl_got_account_actions;
+	    da_purple_prpl_got_user_idle purple_prpl_got_user_idle;
+	    da_purple_prpl_got_user_login_time purple_prpl_got_user_login_time;
+	    da_purple_prpl_got_user_status purple_prpl_got_user_status;
+	    da_purple_prpl_got_user_status_deactive purple_prpl_got_user_status_deactive;
+	    da_purple_prpl_change_account_status purple_prpl_change_account_status;
+	    da_purple_prpl_get_statuses purple_prpl_get_statuses;
+	    da_purple_prpl_send_attention purple_prpl_send_attention;
+	    da_purple_prpl_got_attention purple_prpl_got_attention;
+	    da_purple_prpl_got_attention_in_chat purple_prpl_got_attention_in_chat;
+	    da_purple_prpl_get_media_caps purple_prpl_get_media_caps;
+	    da_purple_prpl_initiate_media purple_prpl_initiate_media;
+	    da_purple_prpl_got_media_caps purple_prpl_got_media_caps;
+	    da_purple_find_prpl purple_find_prpl;
+    }
 }

@@ -98,60 +98,94 @@ struct _PurpleRoomlistUiOps
 	void function () _purple_reserved4;
 }
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_purple_roomlist_show_with_account = void function(PurpleAccount* account);																					
-    alias da_purple_roomlist_new = PurpleRoomlist* function(PurpleAccount* account);																					
-    alias da_purple_roomlist_ref = void function(PurpleRoomlist* list);																									
-    alias da_purple_roomlist_unref = void function(PurpleRoomlist* list);																								
-    alias da_purple_roomlist_set_fields = void function(PurpleRoomlist* list, GList* fields);																			
-    alias da_purple_roomlist_set_in_progress = void function(PurpleRoomlist* list, gboolean in_progress);																
-    alias da_purple_roomlist_get_in_progress = gboolean function(PurpleRoomlist* list);																					
-    alias da_purple_roomlist_room_add = void function(PurpleRoomlist* list, PurpleRoomlistRoom* room);																	
-    alias da_purple_roomlist_get_list = PurpleRoomlist* function(PurpleConnection* gc);																					
-    alias da_purple_roomlist_cancel_get_list = void function(PurpleRoomlist* list);																						
-    alias da_purple_roomlist_expand_category = void function(PurpleRoomlist* list, PurpleRoomlistRoom* category);														
-    alias da_purple_roomlist_get_fields = GList* function(PurpleRoomlist* roomlist);																					
-    alias da_purple_roomlist_room_new = PurpleRoomlistRoom* function(PurpleRoomlistRoomType type, const(gchar)* name, PurpleRoomlistRoom* parent);						
-    alias da_purple_roomlist_room_add_field = void function(PurpleRoomlist* list, PurpleRoomlistRoom* room, gconstpointer field);										
-    alias da_purple_roomlist_room_join = void function(PurpleRoomlist* list, PurpleRoomlistRoom* room);																	
-    alias da_purple_roomlist_room_get_type = PurpleRoomlistRoomType function(PurpleRoomlistRoom* room);																	
-    alias da_purple_roomlist_room_get_name = const(char)* function(PurpleRoomlistRoom* room);																			
-    alias da_purple_roomlist_room_get_parent = PurpleRoomlistRoom* function(PurpleRoomlistRoom* room);																	
-    alias da_purple_roomlist_room_get_fields = GList* function(PurpleRoomlistRoom* room);																				
-    alias da_purple_roomlist_field_new = PurpleRoomlistField* function(PurpleRoomlistFieldType type, const(gchar)* label, const(gchar)* name, gboolean hidden);			
-    alias da_purple_roomlist_field_get_type = PurpleRoomlistFieldType function(PurpleRoomlistField* field);																
-    alias da_purple_roomlist_field_get_label = const(char)* function(PurpleRoomlistField* field);																		
-    alias da_purple_roomlist_field_get_hidden = gboolean function(PurpleRoomlistField* field);																			
-    alias da_purple_roomlist_set_ui_ops = void function(PurpleRoomlistUiOps* ops);																						
-    alias da_purple_roomlist_get_ui_ops = PurpleRoomlistUiOps* function();			
+    extern( C ) nothrow 
+    {
+        void purple_roomlist_show_with_account(PurpleAccount* account);
+        PurpleRoomlist* purple_roomlist_new(PurpleAccount* account);
+        void purple_roomlist_ref(PurpleRoomlist* list);
+        void purple_roomlist_unref(PurpleRoomlist* list);
+        void purple_roomlist_set_fields(PurpleRoomlist* list, GList* fields);
+        void purple_roomlist_set_in_progress(PurpleRoomlist* list, gboolean in_progress);
+        gboolean purple_roomlist_get_in_progress(PurpleRoomlist* list);
+        void purple_roomlist_room_add(PurpleRoomlist* list, PurpleRoomlistRoom* room);
+        PurpleRoomlist* purple_roomlist_get_list(PurpleConnection* gc);
+        void purple_roomlist_cancel_get_list(PurpleRoomlist* list);
+        void purple_roomlist_expand_category(PurpleRoomlist* list, PurpleRoomlistRoom* category);
+        GList* purple_roomlist_get_fields(PurpleRoomlist* roomlist);
+        PurpleRoomlistRoom* purple_roomlist_room_new(PurpleRoomlistRoomType type, const(gchar)* name, PurpleRoomlistRoom* parent);
+        void purple_roomlist_room_add_field(PurpleRoomlist* list, PurpleRoomlistRoom* room, gconstpointer field);
+        void purple_roomlist_room_join(PurpleRoomlist* list, PurpleRoomlistRoom* room);
+        PurpleRoomlistRoomType purple_roomlist_room_get_type(PurpleRoomlistRoom* room);
+        const(char)* purple_roomlist_room_get_name(PurpleRoomlistRoom* room);
+        PurpleRoomlistRoom* purple_roomlist_room_get_parent(PurpleRoomlistRoom* room);
+        GList* purple_roomlist_room_get_fields(PurpleRoomlistRoom* room);
+        PurpleRoomlistField* purple_roomlist_field_new(PurpleRoomlistFieldType type, const(gchar)* label, const(gchar)* name, gboolean hidden);
+        PurpleRoomlistFieldType purple_roomlist_field_get_type(PurpleRoomlistField* field);
+        const(char)* purple_roomlist_field_get_label(PurpleRoomlistField* field);
+        gboolean purple_roomlist_field_get_hidden(PurpleRoomlistField* field);
+        void purple_roomlist_set_ui_ops(PurpleRoomlistUiOps* ops);
+        PurpleRoomlistUiOps* purple_roomlist_get_ui_ops();
+    }
 }
-
-__gshared
+else
 {
-	da_purple_roomlist_show_with_account purple_roomlist_show_with_account;
-	da_purple_roomlist_new purple_roomlist_new;
-	da_purple_roomlist_ref purple_roomlist_ref;
-	da_purple_roomlist_unref purple_roomlist_unref;
-	da_purple_roomlist_set_fields purple_roomlist_set_fields;
-	da_purple_roomlist_set_in_progress purple_roomlist_set_in_progress;
-	da_purple_roomlist_get_in_progress purple_roomlist_get_in_progress;
-	da_purple_roomlist_room_add purple_roomlist_room_add;
-	da_purple_roomlist_get_list purple_roomlist_get_list;
-	da_purple_roomlist_cancel_get_list purple_roomlist_cancel_get_list;
-	da_purple_roomlist_expand_category purple_roomlist_expand_category;
-	da_purple_roomlist_get_fields purple_roomlist_get_fields;
-	da_purple_roomlist_room_new purple_roomlist_room_new;
-	da_purple_roomlist_room_add_field purple_roomlist_room_add_field;
-	da_purple_roomlist_room_join purple_roomlist_room_join;
-	da_purple_roomlist_room_get_type purple_roomlist_room_get_type;
-	da_purple_roomlist_room_get_name purple_roomlist_room_get_name;
-	da_purple_roomlist_room_get_parent purple_roomlist_room_get_parent;
-	da_purple_roomlist_room_get_fields purple_roomlist_room_get_fields;
-	da_purple_roomlist_field_new purple_roomlist_field_new;
-	da_purple_roomlist_field_get_type purple_roomlist_field_get_type;
-	da_purple_roomlist_field_get_label purple_roomlist_field_get_label;
-	da_purple_roomlist_field_get_hidden purple_roomlist_field_get_hidden;
-	da_purple_roomlist_set_ui_ops purple_roomlist_set_ui_ops;
-	da_purple_roomlist_get_ui_ops purple_roomlist_get_ui_ops;
+    extern( C ) nothrow 
+    {
+        alias da_purple_roomlist_show_with_account = void function(PurpleAccount* account);																					
+        alias da_purple_roomlist_new = PurpleRoomlist* function(PurpleAccount* account);																					
+        alias da_purple_roomlist_ref = void function(PurpleRoomlist* list);																									
+        alias da_purple_roomlist_unref = void function(PurpleRoomlist* list);																								
+        alias da_purple_roomlist_set_fields = void function(PurpleRoomlist* list, GList* fields);																			
+        alias da_purple_roomlist_set_in_progress = void function(PurpleRoomlist* list, gboolean in_progress);																
+        alias da_purple_roomlist_get_in_progress = gboolean function(PurpleRoomlist* list);																					
+        alias da_purple_roomlist_room_add = void function(PurpleRoomlist* list, PurpleRoomlistRoom* room);																	
+        alias da_purple_roomlist_get_list = PurpleRoomlist* function(PurpleConnection* gc);																					
+        alias da_purple_roomlist_cancel_get_list = void function(PurpleRoomlist* list);																						
+        alias da_purple_roomlist_expand_category = void function(PurpleRoomlist* list, PurpleRoomlistRoom* category);														
+        alias da_purple_roomlist_get_fields = GList* function(PurpleRoomlist* roomlist);																					
+        alias da_purple_roomlist_room_new = PurpleRoomlistRoom* function(PurpleRoomlistRoomType type, const(gchar)* name, PurpleRoomlistRoom* parent);						
+        alias da_purple_roomlist_room_add_field = void function(PurpleRoomlist* list, PurpleRoomlistRoom* room, gconstpointer field);										
+        alias da_purple_roomlist_room_join = void function(PurpleRoomlist* list, PurpleRoomlistRoom* room);																	
+        alias da_purple_roomlist_room_get_type = PurpleRoomlistRoomType function(PurpleRoomlistRoom* room);																	
+        alias da_purple_roomlist_room_get_name = const(char)* function(PurpleRoomlistRoom* room);																			
+        alias da_purple_roomlist_room_get_parent = PurpleRoomlistRoom* function(PurpleRoomlistRoom* room);																	
+        alias da_purple_roomlist_room_get_fields = GList* function(PurpleRoomlistRoom* room);																				
+        alias da_purple_roomlist_field_new = PurpleRoomlistField* function(PurpleRoomlistFieldType type, const(gchar)* label, const(gchar)* name, gboolean hidden);			
+        alias da_purple_roomlist_field_get_type = PurpleRoomlistFieldType function(PurpleRoomlistField* field);																
+        alias da_purple_roomlist_field_get_label = const(char)* function(PurpleRoomlistField* field);																		
+        alias da_purple_roomlist_field_get_hidden = gboolean function(PurpleRoomlistField* field);																			
+        alias da_purple_roomlist_set_ui_ops = void function(PurpleRoomlistUiOps* ops);																						
+        alias da_purple_roomlist_get_ui_ops = PurpleRoomlistUiOps* function();			
+    }
+
+    __gshared
+    {
+	    da_purple_roomlist_show_with_account purple_roomlist_show_with_account;
+	    da_purple_roomlist_new purple_roomlist_new;
+	    da_purple_roomlist_ref purple_roomlist_ref;
+	    da_purple_roomlist_unref purple_roomlist_unref;
+	    da_purple_roomlist_set_fields purple_roomlist_set_fields;
+	    da_purple_roomlist_set_in_progress purple_roomlist_set_in_progress;
+	    da_purple_roomlist_get_in_progress purple_roomlist_get_in_progress;
+	    da_purple_roomlist_room_add purple_roomlist_room_add;
+	    da_purple_roomlist_get_list purple_roomlist_get_list;
+	    da_purple_roomlist_cancel_get_list purple_roomlist_cancel_get_list;
+	    da_purple_roomlist_expand_category purple_roomlist_expand_category;
+	    da_purple_roomlist_get_fields purple_roomlist_get_fields;
+	    da_purple_roomlist_room_new purple_roomlist_room_new;
+	    da_purple_roomlist_room_add_field purple_roomlist_room_add_field;
+	    da_purple_roomlist_room_join purple_roomlist_room_join;
+	    da_purple_roomlist_room_get_type purple_roomlist_room_get_type;
+	    da_purple_roomlist_room_get_name purple_roomlist_room_get_name;
+	    da_purple_roomlist_room_get_parent purple_roomlist_room_get_parent;
+	    da_purple_roomlist_room_get_fields purple_roomlist_room_get_fields;
+	    da_purple_roomlist_field_new purple_roomlist_field_new;
+	    da_purple_roomlist_field_get_type purple_roomlist_field_get_type;
+	    da_purple_roomlist_field_get_label purple_roomlist_field_get_label;
+	    da_purple_roomlist_field_get_hidden purple_roomlist_field_get_hidden;
+	    da_purple_roomlist_set_ui_ops purple_roomlist_set_ui_ops;
+	    da_purple_roomlist_get_ui_ops purple_roomlist_get_ui_ops;
+    }
 }

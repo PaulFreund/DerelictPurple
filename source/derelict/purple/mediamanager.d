@@ -46,38 +46,61 @@ struct _PurpleMediaManager;
 struct _PurpleMediaManagerClass;																											
 
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-	alias da_purple_media_manager_get_type = GType function();																																					
-    alias da_purple_media_manager_get = PurpleMediaManager* function();																																			
-    alias da_purple_media_manager_create_media = PurpleMedia* function(PurpleMediaManager* manager, PurpleAccount* account, const(char)* conference_type, const(char)* remote_user, gboolean initiator);		
-    alias da_purple_media_manager_get_media = GList* function(PurpleMediaManager* manager);																														
-    alias da_purple_media_manager_get_media_by_account = GList* function(PurpleMediaManager* manager, PurpleAccount* account);																					
-    alias da_purple_media_manager_remove_media = void function(PurpleMediaManager* manager, PurpleMedia* media);																								
-    alias da_purple_media_manager_create_output_window = gboolean function(PurpleMediaManager* manager, PurpleMedia* media, const(gchar)* session_id, const(gchar)* participant);								
-    alias da_purple_media_manager_set_output_window = gulong function(PurpleMediaManager* manager, PurpleMedia* media, const(gchar)* session_id, const(gchar)* participant, gulong window_id);					
-    alias da_purple_media_manager_remove_output_window = gboolean function(PurpleMediaManager* manager, gulong output_window_id);																				
-    alias da_purple_media_manager_remove_output_windows = void function(PurpleMediaManager* manager, PurpleMedia* media, const(gchar)* session_id, const(gchar)* participant);									
-    alias da_purple_media_manager_set_ui_caps = void function(PurpleMediaManager* manager, PurpleMediaCaps caps);																								
-    alias da_purple_media_manager_get_ui_caps = PurpleMediaCaps function(PurpleMediaManager* manager);																											
-    alias da_purple_media_manager_set_backend_type = void function(PurpleMediaManager* manager, GType backend_type);																							
-    alias da_purple_media_manager_get_backend_type = GType function(PurpleMediaManager* manager);	
+    extern( C ) nothrow 
+    {
+	    GType purple_media_manager_get_type();
+        PurpleMediaManager* purple_media_manager_get();
+        PurpleMedia* purple_media_manager_create_media(PurpleMediaManager* manager, PurpleAccount* account, const(char)* conference_type, const(char)* remote_user, gboolean initiator);
+        GList* purple_media_manager_get_media(PurpleMediaManager* manager);
+        GList* purple_media_manager_get_media_by_account(PurpleMediaManager* manager, PurpleAccount* account);
+        void purple_media_manager_remove_media(PurpleMediaManager* manager, PurpleMedia* media);
+        gboolean purple_media_manager_create_output_window(PurpleMediaManager* manager, PurpleMedia* media, const(gchar)* session_id, const(gchar)* participant);
+        gulong purple_media_manager_set_output_window(PurpleMediaManager* manager, PurpleMedia* media, const(gchar)* session_id, const(gchar)* participant, gulong window_id);
+        gboolean purple_media_manager_remove_output_window(PurpleMediaManager* manager, gulong output_window_id);
+        void purple_media_manager_remove_output_windows(PurpleMediaManager* manager, PurpleMedia* media, const(gchar)* session_id, const(gchar)* participant);
+        void purple_media_manager_set_ui_caps(PurpleMediaManager* manager, PurpleMediaCaps caps);
+        PurpleMediaCaps purple_media_manager_get_ui_caps(PurpleMediaManager* manager);
+        void purple_media_manager_set_backend_type(PurpleMediaManager* manager, GType backend_type);
+        GType purple_media_manager_get_backend_type(PurpleMediaManager* manager);
+    }
 }
-
-__gshared
+else
 {
-	da_purple_media_manager_get_type purple_media_manager_get_type;
-	da_purple_media_manager_get purple_media_manager_get;
-	da_purple_media_manager_create_media purple_media_manager_create_media;
-	da_purple_media_manager_get_media purple_media_manager_get_media;
-	da_purple_media_manager_get_media_by_account purple_media_manager_get_media_by_account;
-	da_purple_media_manager_remove_media purple_media_manager_remove_media;
-	da_purple_media_manager_create_output_window purple_media_manager_create_output_window;
-	da_purple_media_manager_set_output_window purple_media_manager_set_output_window;
-	da_purple_media_manager_remove_output_window purple_media_manager_remove_output_window;
-	da_purple_media_manager_remove_output_windows purple_media_manager_remove_output_windows;
-	da_purple_media_manager_set_ui_caps purple_media_manager_set_ui_caps;
-	da_purple_media_manager_get_ui_caps purple_media_manager_get_ui_caps;
-	da_purple_media_manager_set_backend_type purple_media_manager_set_backend_type;
-	da_purple_media_manager_get_backend_type purple_media_manager_get_backend_type;
+    extern( C ) nothrow 
+    {
+	    alias da_purple_media_manager_get_type = GType function();																																					
+        alias da_purple_media_manager_get = PurpleMediaManager* function();																																			
+        alias da_purple_media_manager_create_media = PurpleMedia* function(PurpleMediaManager* manager, PurpleAccount* account, const(char)* conference_type, const(char)* remote_user, gboolean initiator);		
+        alias da_purple_media_manager_get_media = GList* function(PurpleMediaManager* manager);																														
+        alias da_purple_media_manager_get_media_by_account = GList* function(PurpleMediaManager* manager, PurpleAccount* account);																					
+        alias da_purple_media_manager_remove_media = void function(PurpleMediaManager* manager, PurpleMedia* media);																								
+        alias da_purple_media_manager_create_output_window = gboolean function(PurpleMediaManager* manager, PurpleMedia* media, const(gchar)* session_id, const(gchar)* participant);								
+        alias da_purple_media_manager_set_output_window = gulong function(PurpleMediaManager* manager, PurpleMedia* media, const(gchar)* session_id, const(gchar)* participant, gulong window_id);					
+        alias da_purple_media_manager_remove_output_window = gboolean function(PurpleMediaManager* manager, gulong output_window_id);																				
+        alias da_purple_media_manager_remove_output_windows = void function(PurpleMediaManager* manager, PurpleMedia* media, const(gchar)* session_id, const(gchar)* participant);									
+        alias da_purple_media_manager_set_ui_caps = void function(PurpleMediaManager* manager, PurpleMediaCaps caps);																								
+        alias da_purple_media_manager_get_ui_caps = PurpleMediaCaps function(PurpleMediaManager* manager);																											
+        alias da_purple_media_manager_set_backend_type = void function(PurpleMediaManager* manager, GType backend_type);																							
+        alias da_purple_media_manager_get_backend_type = GType function(PurpleMediaManager* manager);	
+    }
+
+    __gshared
+    {
+	    da_purple_media_manager_get_type purple_media_manager_get_type;
+	    da_purple_media_manager_get purple_media_manager_get;
+	    da_purple_media_manager_create_media purple_media_manager_create_media;
+	    da_purple_media_manager_get_media purple_media_manager_get_media;
+	    da_purple_media_manager_get_media_by_account purple_media_manager_get_media_by_account;
+	    da_purple_media_manager_remove_media purple_media_manager_remove_media;
+	    da_purple_media_manager_create_output_window purple_media_manager_create_output_window;
+	    da_purple_media_manager_set_output_window purple_media_manager_set_output_window;
+	    da_purple_media_manager_remove_output_window purple_media_manager_remove_output_window;
+	    da_purple_media_manager_remove_output_windows purple_media_manager_remove_output_windows;
+	    da_purple_media_manager_set_ui_caps purple_media_manager_set_ui_caps;
+	    da_purple_media_manager_get_ui_caps purple_media_manager_get_ui_caps;
+	    da_purple_media_manager_set_backend_type purple_media_manager_set_backend_type;
+	    da_purple_media_manager_get_backend_type purple_media_manager_get_backend_type;
+    }
 }

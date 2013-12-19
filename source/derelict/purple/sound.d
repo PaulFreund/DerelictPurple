@@ -66,24 +66,40 @@ struct _PurpleSoundUiOps
 	void function () _purple_reserved4;
 }
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_purple_sound_play_file = void function(const(char)* filename, const(PurpleAccount)* account);				
-    alias da_purple_sound_play_event = void function(PurpleSoundEventID event, const(PurpleAccount)* account);			
-    alias da_purple_sound_set_ui_ops = void function(PurpleSoundUiOps* ops);											
-    alias da_purple_sound_get_ui_ops = PurpleSoundUiOps* function();													
-    alias da_purple_sound_init = void function();																		
-    alias da_purple_sound_uninit = void function();																		
-    alias da_purple_sounds_get_handle = void* function();		
+    extern( C ) nothrow 
+    {
+        void purple_sound_play_file(const(char)* filename, const(PurpleAccount)* account);
+        void purple_sound_play_event(PurpleSoundEventID event, const(PurpleAccount)* account);
+        void purple_sound_set_ui_ops(PurpleSoundUiOps* ops);
+        PurpleSoundUiOps* purple_sound_get_ui_ops();
+        void purple_sound_init();
+        void purple_sound_uninit();
+        void* purple_sounds_get_handle();
+    }
 }
-
-__gshared
+else
 {
-	da_purple_sound_play_file purple_sound_play_file;
-	da_purple_sound_play_event purple_sound_play_event;
-	da_purple_sound_set_ui_ops purple_sound_set_ui_ops;
-	da_purple_sound_get_ui_ops purple_sound_get_ui_ops;
-	da_purple_sound_init purple_sound_init;
-	da_purple_sound_uninit purple_sound_uninit;
-	da_purple_sounds_get_handle purple_sounds_get_handle;
+    extern( C ) nothrow 
+    {
+        alias da_purple_sound_play_file = void function(const(char)* filename, const(PurpleAccount)* account);				
+        alias da_purple_sound_play_event = void function(PurpleSoundEventID event, const(PurpleAccount)* account);			
+        alias da_purple_sound_set_ui_ops = void function(PurpleSoundUiOps* ops);											
+        alias da_purple_sound_get_ui_ops = PurpleSoundUiOps* function();													
+        alias da_purple_sound_init = void function();																		
+        alias da_purple_sound_uninit = void function();																		
+        alias da_purple_sounds_get_handle = void* function();		
+    }
+
+    __gshared
+    {
+	    da_purple_sound_play_file purple_sound_play_file;
+	    da_purple_sound_play_event purple_sound_play_event;
+	    da_purple_sound_set_ui_ops purple_sound_set_ui_ops;
+	    da_purple_sound_get_ui_ops purple_sound_get_ui_ops;
+	    da_purple_sound_init purple_sound_init;
+	    da_purple_sound_uninit purple_sound_uninit;
+	    da_purple_sounds_get_handle purple_sounds_get_handle;
+    }
 }

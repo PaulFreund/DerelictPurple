@@ -33,26 +33,49 @@ import derelict.glib.glibconfig;
 
 extern (C):
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_purple_major_version = const guint;
-    alias da_purple_minor_version = const guint;
-    alias da_purple_micro_version = const guint;
+    extern( C ) nothrow 
+    {
+        const guint purple_major_version;
+        const guint purple_minor_version;
+        const guint purple_micro_version;
+    }
+}
+else
+{
+    extern( C ) nothrow 
+    {
+        alias da_purple_major_version = const guint;
+        alias da_purple_minor_version = const guint;
+        alias da_purple_micro_version = const guint;
+    }
+
+    __gshared
+    {
+        da_purple_major_version purple_major_version;
+        da_purple_minor_version purple_minor_version;
+        da_purple_micro_version purple_micro_version;
+    }
 }
 
-__gshared
-{
-    da_purple_major_version purple_major_version;
-    da_purple_minor_version purple_minor_version;
-    da_purple_micro_version purple_micro_version;
-}
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_purple_version_check = const(char)* function(guint required_major, guint required_minor, guint required_micro);
+    extern( C ) nothrow 
+    {
+        const(char)* purple_version_check(guint required_major, guint required_minor, guint required_micro);
+    }
 }
-
-__gshared
+else
 {
-	da_purple_version_check purple_version_check;	
+    extern( C ) nothrow 
+    {
+        alias da_purple_version_check = const(char)* function(guint required_major, guint required_minor, guint required_micro);
+    }
+
+    __gshared
+    {
+	    da_purple_version_check purple_version_check;	
+    }
 }

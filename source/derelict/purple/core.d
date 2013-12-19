@@ -51,32 +51,52 @@ struct _Anonymous_0
 struct PurpleCore;
 
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_purple_core_init = gboolean function(const(char)* ui);					
-    alias da_purple_core_quit = void function();									
-    alias da_purple_core_quit_cb = gboolean function(gpointer unused);				
-    alias da_purple_core_get_version = const(char)* function();						
-    alias da_purple_core_get_ui = const(char)* function();							
-    alias da_purple_get_core = PurpleCore* function();								
-    alias da_purple_core_set_ui_ops = void function(PurpleCoreUiOps* ops);			
-    alias da_purple_core_get_ui_ops = PurpleCoreUiOps* function();					
-    alias da_purple_core_migrate = gboolean function();								
-    alias da_purple_core_ensure_single_instance = gboolean function();				
-    alias da_purple_core_get_ui_info = GHashTable* function();			
+    extern( C ) nothrow 
+    {
+        gboolean purple_core_init(const(char)* ui);
+        void purple_core_quit();
+        gboolean purple_core_quit_cb(gpointer unused);
+        const(char)* purple_core_get_version();
+        const(char)* purple_core_get_ui();
+        PurpleCore* purple_get_core();
+        void purple_core_set_ui_ops(PurpleCoreUiOps* ops);
+        PurpleCoreUiOps* purple_core_get_ui_ops();
+        gboolean purple_core_migrate();
+        gboolean purple_core_ensure_single_instance();
+        GHashTable* purple_core_get_ui_info();
+    }
 }
-
-__gshared
+else
 {
-	da_purple_core_init purple_core_init;
-	da_purple_core_quit purple_core_quit;
-	da_purple_core_quit_cb purple_core_quit_cb;
-	da_purple_core_get_version purple_core_get_version;
-	da_purple_core_get_ui purple_core_get_ui;
-	da_purple_get_core purple_get_core;
-	da_purple_core_set_ui_ops purple_core_set_ui_ops;
-	da_purple_core_get_ui_ops purple_core_get_ui_ops;
-	da_purple_core_migrate purple_core_migrate;
-	da_purple_core_ensure_single_instance purple_core_ensure_single_instance;
-	da_purple_core_get_ui_info purple_core_get_ui_info;
+    extern( C ) nothrow 
+    {
+        alias da_purple_core_init = gboolean function(const(char)* ui);					
+        alias da_purple_core_quit = void function();									
+        alias da_purple_core_quit_cb = gboolean function(gpointer unused);				
+        alias da_purple_core_get_version = const(char)* function();						
+        alias da_purple_core_get_ui = const(char)* function();							
+        alias da_purple_get_core = PurpleCore* function();								
+        alias da_purple_core_set_ui_ops = void function(PurpleCoreUiOps* ops);			
+        alias da_purple_core_get_ui_ops = PurpleCoreUiOps* function();					
+        alias da_purple_core_migrate = gboolean function();								
+        alias da_purple_core_ensure_single_instance = gboolean function();				
+        alias da_purple_core_get_ui_info = GHashTable* function();			
+    }
+
+    __gshared
+    {
+	    da_purple_core_init purple_core_init;
+	    da_purple_core_quit purple_core_quit;
+	    da_purple_core_quit_cb purple_core_quit_cb;
+	    da_purple_core_get_version purple_core_get_version;
+	    da_purple_core_get_ui purple_core_get_ui;
+	    da_purple_get_core purple_get_core;
+	    da_purple_core_set_ui_ops purple_core_set_ui_ops;
+	    da_purple_core_get_ui_ops purple_core_get_ui_ops;
+	    da_purple_core_migrate purple_core_migrate;
+	    da_purple_core_ensure_single_instance purple_core_ensure_single_instance;
+	    da_purple_core_get_ui_info purple_core_get_ui_info;
+    }
 }

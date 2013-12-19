@@ -49,18 +49,31 @@ struct _PurpleSoundThemeClass
 }
 
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_purple_sound_theme_get_type = GType function();																		
-    alias da_purple_sound_theme_get_file = const(gchar)* function(PurpleSoundTheme* theme, const(gchar)* event);					
-    alias da_purple_sound_theme_get_file_full = gchar* function(PurpleSoundTheme* theme, const(gchar)* event);						
-    alias da_purple_sound_theme_set_file = void function(PurpleSoundTheme* theme, const(gchar)* event, const(gchar)* filename);		
+    extern( C ) nothrow 
+    {
+        GType purple_sound_theme_get_type();
+        const(gchar)* purple_sound_theme_get_file(PurpleSoundTheme* theme, const(gchar)* event);
+        gchar* purple_sound_theme_get_file_full(PurpleSoundTheme* theme, const(gchar)* event);
+        void purple_sound_theme_set_file(PurpleSoundTheme* theme, const(gchar)* event, const(gchar)* filename);
+    }
 }
-
-__gshared
+else
 {
-	da_purple_sound_theme_get_type purple_sound_theme_get_type;
-	da_purple_sound_theme_get_file purple_sound_theme_get_file;
-	da_purple_sound_theme_get_file_full purple_sound_theme_get_file_full;
-	da_purple_sound_theme_set_file purple_sound_theme_set_file;
+    extern( C ) nothrow 
+    {
+        alias da_purple_sound_theme_get_type = GType function();																		
+        alias da_purple_sound_theme_get_file = const(gchar)* function(PurpleSoundTheme* theme, const(gchar)* event);					
+        alias da_purple_sound_theme_get_file_full = gchar* function(PurpleSoundTheme* theme, const(gchar)* event);						
+        alias da_purple_sound_theme_set_file = void function(PurpleSoundTheme* theme, const(gchar)* event, const(gchar)* filename);		
+    }
+
+    __gshared
+    {
+	    da_purple_sound_theme_get_type purple_sound_theme_get_type;
+	    da_purple_sound_theme_get_file purple_sound_theme_get_file;
+	    da_purple_sound_theme_get_file_full purple_sound_theme_get_file_full;
+	    da_purple_sound_theme_set_file purple_sound_theme_set_file;
+    }
 }

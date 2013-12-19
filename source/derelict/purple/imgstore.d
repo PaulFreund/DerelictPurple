@@ -37,41 +37,64 @@ alias _PurpleStoredImage PurpleStoredImage;
 
 struct _PurpleStoredImage;
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_purple_imgstore_add = PurpleStoredImage* function(gpointer data, size_t size, const(char)* filename);		
-    alias da_purple_imgstore_new_from_file = PurpleStoredImage* function(const(char)* path);							
-    alias da_purple_imgstore_add_with_id = int function(gpointer data, size_t size, const(char)* filename);				
-    alias da_purple_imgstore_find_by_id = PurpleStoredImage* function(int id);											
-    alias da_purple_imgstore_get_data = gconstpointer function(PurpleStoredImage* img);									
-    alias da_purple_imgstore_get_size = size_t function(PurpleStoredImage* img);										
-    alias da_purple_imgstore_get_filename = const(char)* function(const(PurpleStoredImage)* img);						
-    alias da_purple_imgstore_get_extension = const(char)* function(PurpleStoredImage* img);								
-    alias da_purple_imgstore_ref = PurpleStoredImage* function(PurpleStoredImage* img);									
-    alias da_purple_imgstore_unref = PurpleStoredImage* function(PurpleStoredImage* img);								
-    alias da_purple_imgstore_ref_by_id = void function(int id);															
-    alias da_purple_imgstore_unref_by_id = void function(int id);														
-    alias da_purple_imgstore_get_handle = void* function();																
-    alias da_purple_imgstore_init = void function();																	
-    alias da_purple_imgstore_uninit = void function();																	
+    extern( C ) nothrow 
+    {
+        PurpleStoredImage* purple_imgstore_add(gpointer data, size_t size, const(char)* filename);
+        PurpleStoredImage* purple_imgstore_new_from_file(const(char)* path);
+        int purple_imgstore_add_with_id(gpointer data, size_t size, const(char)* filename);
+        PurpleStoredImage* purple_imgstore_find_by_id(int id);
+        gconstpointer purple_imgstore_get_data(PurpleStoredImage* img);
+        size_t purple_imgstore_get_size(PurpleStoredImage* img);
+        const(char)* purple_imgstore_get_filename(const(PurpleStoredImage)* img);
+        const(char)* purple_imgstore_get_extension(PurpleStoredImage* img);
+        PurpleStoredImage* purple_imgstore_ref(PurpleStoredImage* img);
+        PurpleStoredImage* purple_imgstore_unref(PurpleStoredImage* img);
+        void purple_imgstore_ref_by_id(int id);
+        void purple_imgstore_unref_by_id(int id);
+        void* purple_imgstore_get_handle();
+        void purple_imgstore_init();
+        void purple_imgstore_uninit();
+    }
 }
-
-__gshared
+else
 {
-	da_purple_imgstore_add purple_imgstore_add;
-	da_purple_imgstore_new_from_file purple_imgstore_new_from_file;
-	da_purple_imgstore_add_with_id purple_imgstore_add_with_id;
-	da_purple_imgstore_find_by_id purple_imgstore_find_by_id;
-	da_purple_imgstore_get_data purple_imgstore_get_data;
-	da_purple_imgstore_get_size purple_imgstore_get_size;
-	da_purple_imgstore_get_filename purple_imgstore_get_filename;
-	da_purple_imgstore_get_extension purple_imgstore_get_extension;
-	da_purple_imgstore_ref purple_imgstore_ref;
-	da_purple_imgstore_unref purple_imgstore_unref;
-	da_purple_imgstore_ref_by_id purple_imgstore_ref_by_id;
-	da_purple_imgstore_unref_by_id purple_imgstore_unref_by_id;
-	da_purple_imgstore_get_handle purple_imgstore_get_handle;
-	da_purple_imgstore_init purple_imgstore_init;
-	da_purple_imgstore_uninit purple_imgstore_uninit;
+    extern( C ) nothrow 
+    {
+        alias da_purple_imgstore_add = PurpleStoredImage* function(gpointer data, size_t size, const(char)* filename);		
+        alias da_purple_imgstore_new_from_file = PurpleStoredImage* function(const(char)* path);							
+        alias da_purple_imgstore_add_with_id = int function(gpointer data, size_t size, const(char)* filename);				
+        alias da_purple_imgstore_find_by_id = PurpleStoredImage* function(int id);											
+        alias da_purple_imgstore_get_data = gconstpointer function(PurpleStoredImage* img);									
+        alias da_purple_imgstore_get_size = size_t function(PurpleStoredImage* img);										
+        alias da_purple_imgstore_get_filename = const(char)* function(const(PurpleStoredImage)* img);						
+        alias da_purple_imgstore_get_extension = const(char)* function(PurpleStoredImage* img);								
+        alias da_purple_imgstore_ref = PurpleStoredImage* function(PurpleStoredImage* img);									
+        alias da_purple_imgstore_unref = PurpleStoredImage* function(PurpleStoredImage* img);								
+        alias da_purple_imgstore_ref_by_id = void function(int id);															
+        alias da_purple_imgstore_unref_by_id = void function(int id);														
+        alias da_purple_imgstore_get_handle = void* function();																
+        alias da_purple_imgstore_init = void function();																	
+        alias da_purple_imgstore_uninit = void function();																	
+    }
 
+    __gshared
+    {
+	    da_purple_imgstore_add purple_imgstore_add;
+	    da_purple_imgstore_new_from_file purple_imgstore_new_from_file;
+	    da_purple_imgstore_add_with_id purple_imgstore_add_with_id;
+	    da_purple_imgstore_find_by_id purple_imgstore_find_by_id;
+	    da_purple_imgstore_get_data purple_imgstore_get_data;
+	    da_purple_imgstore_get_size purple_imgstore_get_size;
+	    da_purple_imgstore_get_filename purple_imgstore_get_filename;
+	    da_purple_imgstore_get_extension purple_imgstore_get_extension;
+	    da_purple_imgstore_ref purple_imgstore_ref;
+	    da_purple_imgstore_unref purple_imgstore_unref;
+	    da_purple_imgstore_ref_by_id purple_imgstore_ref_by_id;
+	    da_purple_imgstore_unref_by_id purple_imgstore_unref_by_id;
+	    da_purple_imgstore_get_handle purple_imgstore_get_handle;
+	    da_purple_imgstore_init purple_imgstore_init;
+	    da_purple_imgstore_uninit purple_imgstore_uninit;
+    }
 }

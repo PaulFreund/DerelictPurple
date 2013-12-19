@@ -47,12 +47,22 @@ struct _PurpleSoundThemeLoaderClass
 	PurpleThemeLoaderClass parent_class;
 }
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_purple_sound_theme_loader_get_type = GType function();				
+    extern( C ) nothrow 
+    {
+        GType purple_sound_theme_loader_get_type();
+    }
 }
-
-__gshared
+else
 {
-    da_purple_sound_theme_loader_get_type purple_sound_theme_loader_get_type; 
+    extern( C ) nothrow 
+    {
+        alias da_purple_sound_theme_loader_get_type = GType function();				
+    }
+
+    __gshared
+    {
+        da_purple_sound_theme_loader_get_type purple_sound_theme_loader_get_type; 
+    }
 }

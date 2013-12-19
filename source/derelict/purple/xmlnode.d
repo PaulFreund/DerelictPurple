@@ -61,66 +61,103 @@ struct _xmlnode
 }
 
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-    alias da_xmlnode_new = xmlnode* function(const(char)* name);																									
-    alias da_xmlnode_new_child = xmlnode* function(xmlnode* parent, const(char)* name);																				
-    alias da_xmlnode_insert_child = void function(xmlnode* parent, xmlnode* child);																					
-    alias da_xmlnode_get_child = xmlnode* function(const(xmlnode)* parent, const(char)* name);																		
-    alias da_xmlnode_get_child_with_namespace = xmlnode* function(const(xmlnode)* parent, const(char)* name, const(char)* xmlns);									
-    alias da_xmlnode_get_next_twin = xmlnode* function(xmlnode* node);																								
-    alias da_xmlnode_insert_data = void function(xmlnode* node, const(char)* data, gssize size);																	
-    alias da_xmlnode_get_data = char* function(const(xmlnode)* node);																								
-    alias da_xmlnode_get_data_unescaped = char* function(const(xmlnode)* node);																						
-    alias da_xmlnode_set_attrib = void function(xmlnode* node, const(char)* attr, const(char)* value);																
-    alias da_xmlnode_set_attrib_with_prefix = void function(xmlnode* node, const(char)* attr, const(char)* prefix, const(char)* value);								
-    alias da_xmlnode_set_attrib_with_namespace = void function(xmlnode* node, const(char)* attr, const(char)* xmlns, const(char)* value);							
-    alias da_xmlnode_set_attrib_full = void function(xmlnode* node, const(char)* attr, const(char)* xmlns, const(char)* prefix, const(char)* value);				
-    alias da_xmlnode_get_attrib = const(char)* function(const(xmlnode)* node, const(char)* attr);																	
-    alias da_xmlnode_get_attrib_with_namespace = const(char)* function(const(xmlnode)* node, const(char)* attr, const(char)* xmlns);								
-    alias da_xmlnode_remove_attrib = void function(xmlnode* node, const(char)* attr);																				
-    alias da_xmlnode_remove_attrib_with_namespace = void function(xmlnode* node, const(char)* attr, const(char)* xmlns);											
-    alias da_xmlnode_set_namespace = void function(xmlnode* node, const(char)* xmlns);																				
-    alias da_xmlnode_get_namespace = const(char)* function(xmlnode* node);																							
-    alias da_xmlnode_set_prefix = void function(xmlnode* node, const(char)* prefix);																				
-    alias da_xmlnode_get_prefix = const(char)* function(const(xmlnode)* node);																						
-    alias da_xmlnode_get_parent = xmlnode* function(const(xmlnode)* child);																							
-    alias da_xmlnode_to_str = char* function(const(xmlnode)* node, int* len);																						
-    alias da_xmlnode_to_formatted_str = char* function(const(xmlnode)* node, int* len);																				
-    alias da_xmlnode_from_str = xmlnode* function(const(char)* str, gssize size);																					
-    alias da_xmlnode_copy = xmlnode* function(const(xmlnode)* src);																									
-    alias da_xmlnode_free = void function(xmlnode* node);																											
-    alias da_xmlnode_from_file = xmlnode* function(const(char)* dir, const(char)* filename, const(char)* description, const(char)* process);	
+    extern( C ) nothrow 
+    {
+        xmlnode* xmlnode_new(const(char)* name);
+        xmlnode* xmlnode_new_child(xmlnode* parent, const(char)* name);
+        void xmlnode_insert_child(xmlnode* parent, xmlnode* child);
+        xmlnode* xmlnode_get_child(const(xmlnode)* parent, const(char)* name);
+        xmlnode* xmlnode_get_child_with_namespace(const(xmlnode)* parent, const(char)* name, const(char)* xmlns);
+        xmlnode* xmlnode_get_next_twin(xmlnode* node);
+        void xmlnode_insert_data(xmlnode* node, const(char)* data, gssize size);
+        char* xmlnode_get_data(const(xmlnode)* node);
+        char* xmlnode_get_data_unescaped(const(xmlnode)* node);
+        void xmlnode_set_attrib(xmlnode* node, const(char)* attr, const(char)* value);
+        void xmlnode_set_attrib_with_prefix(xmlnode* node, const(char)* attr, const(char)* prefix, const(char)* value);
+        void xmlnode_set_attrib_with_namespace(xmlnode* node, const(char)* attr, const(char)* xmlns, const(char)* value);
+        void xmlnode_set_attrib_full(xmlnode* node, const(char)* attr, const(char)* xmlns, const(char)* prefix, const(char)* value);
+        const(char)* xmlnode_get_attrib(const(xmlnode)* node, const(char)* attr);
+        const(char)* xmlnode_get_attrib_with_namespace(const(xmlnode)* node, const(char)* attr, const(char)* xmlns);
+        void xmlnode_remove_attrib(xmlnode* node, const(char)* attr);
+        void xmlnode_remove_attrib_with_namespace(xmlnode* node, const(char)* attr, const(char)* xmlns);
+        void xmlnode_set_namespace(xmlnode* node, const(char)* xmlns);
+        const(char)* xmlnode_get_namespace(xmlnode* node);
+        void xmlnode_set_prefix(xmlnode* node, const(char)* prefix);
+        const(char)* xmlnode_get_prefix(const(xmlnode)* node);
+        xmlnode* xmlnode_get_parent(const(xmlnode)* child);
+        char* xmlnode_to_str(const(xmlnode)* node, int* len);
+        char* xmlnode_to_formatted_str(const(xmlnode)* node, int* len);
+        xmlnode* xmlnode_from_str(const(char)* str, gssize size);
+        xmlnode* xmlnode_copy(const(xmlnode)* src);
+        void xmlnode_free(xmlnode* node);
+        xmlnode* xmlnode_from_file(const(char)* dir, const(char)* filename, const(char)* description, const(char)* process);
+    }
 }
-
-__gshared
+else
 {
-	da_xmlnode_new xmlnode_new;
-	da_xmlnode_new_child xmlnode_new_child;
-	da_xmlnode_insert_child xmlnode_insert_child;
-	da_xmlnode_get_child xmlnode_get_child;
-	da_xmlnode_get_child_with_namespace xmlnode_get_child_with_namespace;
-	da_xmlnode_get_next_twin xmlnode_get_next_twin;
-	da_xmlnode_insert_data xmlnode_insert_data;
-	da_xmlnode_get_data xmlnode_get_data;
-	da_xmlnode_get_data_unescaped xmlnode_get_data_unescaped;
-	da_xmlnode_set_attrib xmlnode_set_attrib;
-	da_xmlnode_set_attrib_with_prefix xmlnode_set_attrib_with_prefix;
-	da_xmlnode_set_attrib_with_namespace xmlnode_set_attrib_with_namespace;
-	da_xmlnode_set_attrib_full xmlnode_set_attrib_full;
-	da_xmlnode_get_attrib xmlnode_get_attrib;
-	da_xmlnode_get_attrib_with_namespace xmlnode_get_attrib_with_namespace;
-	da_xmlnode_remove_attrib xmlnode_remove_attrib;
-	da_xmlnode_remove_attrib_with_namespace xmlnode_remove_attrib_with_namespace;
-	da_xmlnode_set_namespace xmlnode_set_namespace;
-	da_xmlnode_get_namespace xmlnode_get_namespace;
-	da_xmlnode_set_prefix xmlnode_set_prefix;
-	da_xmlnode_get_prefix xmlnode_get_prefix;
-	da_xmlnode_get_parent xmlnode_get_parent;
-	da_xmlnode_to_str xmlnode_to_str;
-	da_xmlnode_to_formatted_str xmlnode_to_formatted_str;
-	da_xmlnode_from_str xmlnode_from_str;
-	da_xmlnode_copy xmlnode_copy;
-	da_xmlnode_free xmlnode_free;
-	da_xmlnode_from_file xmlnode_from_file;
+    extern( C ) nothrow 
+    {
+        alias da_xmlnode_new = xmlnode* function(const(char)* name);																									
+        alias da_xmlnode_new_child = xmlnode* function(xmlnode* parent, const(char)* name);																				
+        alias da_xmlnode_insert_child = void function(xmlnode* parent, xmlnode* child);																					
+        alias da_xmlnode_get_child = xmlnode* function(const(xmlnode)* parent, const(char)* name);																		
+        alias da_xmlnode_get_child_with_namespace = xmlnode* function(const(xmlnode)* parent, const(char)* name, const(char)* xmlns);									
+        alias da_xmlnode_get_next_twin = xmlnode* function(xmlnode* node);																								
+        alias da_xmlnode_insert_data = void function(xmlnode* node, const(char)* data, gssize size);																	
+        alias da_xmlnode_get_data = char* function(const(xmlnode)* node);																								
+        alias da_xmlnode_get_data_unescaped = char* function(const(xmlnode)* node);																						
+        alias da_xmlnode_set_attrib = void function(xmlnode* node, const(char)* attr, const(char)* value);																
+        alias da_xmlnode_set_attrib_with_prefix = void function(xmlnode* node, const(char)* attr, const(char)* prefix, const(char)* value);								
+        alias da_xmlnode_set_attrib_with_namespace = void function(xmlnode* node, const(char)* attr, const(char)* xmlns, const(char)* value);							
+        alias da_xmlnode_set_attrib_full = void function(xmlnode* node, const(char)* attr, const(char)* xmlns, const(char)* prefix, const(char)* value);				
+        alias da_xmlnode_get_attrib = const(char)* function(const(xmlnode)* node, const(char)* attr);																	
+        alias da_xmlnode_get_attrib_with_namespace = const(char)* function(const(xmlnode)* node, const(char)* attr, const(char)* xmlns);								
+        alias da_xmlnode_remove_attrib = void function(xmlnode* node, const(char)* attr);																				
+        alias da_xmlnode_remove_attrib_with_namespace = void function(xmlnode* node, const(char)* attr, const(char)* xmlns);											
+        alias da_xmlnode_set_namespace = void function(xmlnode* node, const(char)* xmlns);																				
+        alias da_xmlnode_get_namespace = const(char)* function(xmlnode* node);																							
+        alias da_xmlnode_set_prefix = void function(xmlnode* node, const(char)* prefix);																				
+        alias da_xmlnode_get_prefix = const(char)* function(const(xmlnode)* node);																						
+        alias da_xmlnode_get_parent = xmlnode* function(const(xmlnode)* child);																							
+        alias da_xmlnode_to_str = char* function(const(xmlnode)* node, int* len);																						
+        alias da_xmlnode_to_formatted_str = char* function(const(xmlnode)* node, int* len);																				
+        alias da_xmlnode_from_str = xmlnode* function(const(char)* str, gssize size);																					
+        alias da_xmlnode_copy = xmlnode* function(const(xmlnode)* src);																									
+        alias da_xmlnode_free = void function(xmlnode* node);																											
+        alias da_xmlnode_from_file = xmlnode* function(const(char)* dir, const(char)* filename, const(char)* description, const(char)* process);	
+    }
+
+    __gshared
+    {
+	    da_xmlnode_new xmlnode_new;
+	    da_xmlnode_new_child xmlnode_new_child;
+	    da_xmlnode_insert_child xmlnode_insert_child;
+	    da_xmlnode_get_child xmlnode_get_child;
+	    da_xmlnode_get_child_with_namespace xmlnode_get_child_with_namespace;
+	    da_xmlnode_get_next_twin xmlnode_get_next_twin;
+	    da_xmlnode_insert_data xmlnode_insert_data;
+	    da_xmlnode_get_data xmlnode_get_data;
+	    da_xmlnode_get_data_unescaped xmlnode_get_data_unescaped;
+	    da_xmlnode_set_attrib xmlnode_set_attrib;
+	    da_xmlnode_set_attrib_with_prefix xmlnode_set_attrib_with_prefix;
+	    da_xmlnode_set_attrib_with_namespace xmlnode_set_attrib_with_namespace;
+	    da_xmlnode_set_attrib_full xmlnode_set_attrib_full;
+	    da_xmlnode_get_attrib xmlnode_get_attrib;
+	    da_xmlnode_get_attrib_with_namespace xmlnode_get_attrib_with_namespace;
+	    da_xmlnode_remove_attrib xmlnode_remove_attrib;
+	    da_xmlnode_remove_attrib_with_namespace xmlnode_remove_attrib_with_namespace;
+	    da_xmlnode_set_namespace xmlnode_set_namespace;
+	    da_xmlnode_get_namespace xmlnode_get_namespace;
+	    da_xmlnode_set_prefix xmlnode_set_prefix;
+	    da_xmlnode_get_prefix xmlnode_get_prefix;
+	    da_xmlnode_get_parent xmlnode_get_parent;
+	    da_xmlnode_to_str xmlnode_to_str;
+	    da_xmlnode_to_formatted_str xmlnode_to_formatted_str;
+	    da_xmlnode_from_str xmlnode_from_str;
+	    da_xmlnode_copy xmlnode_copy;
+	    da_xmlnode_free xmlnode_free;
+	    da_xmlnode_from_file xmlnode_from_file;
+    }
 }

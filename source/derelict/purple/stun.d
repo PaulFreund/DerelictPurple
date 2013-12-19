@@ -65,14 +65,25 @@ struct _PurpleStunNatDiscovery
 }
 
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-	alias da_purple_stun_discover = PurpleStunNatDiscovery* function(StunCallback cb);		
-    alias da_purple_stun_init = void function();		
+    extern( C ) nothrow 
+    {
+	    PurpleStunNatDiscovery* purple_stun_discover(StunCallback cb);
+        void purple_stun_init();
+    }
 }
-
-__gshared
+else
 {
-	da_purple_stun_discover purple_stun_discover;
-	da_purple_stun_init purple_stun_init;
+    extern( C ) nothrow 
+    {
+	    alias da_purple_stun_discover = PurpleStunNatDiscovery* function(StunCallback cb);		
+        alias da_purple_stun_init = void function();		
+    }
+
+    __gshared
+    {
+	    da_purple_stun_discover purple_stun_discover;
+	    da_purple_stun_init purple_stun_init;
+    }
 }

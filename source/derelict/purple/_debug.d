@@ -57,40 +57,64 @@ struct _Anonymous_1
 }
 
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-	alias da_purple_debug = void function(PurpleDebugLevel level, const(char)* category, const(char)* format, ...);			
-    alias da_purple_debug_misc = void function(const(char)* category, const(char)* format, ...);							
-    alias da_purple_debug_info = void function(const(char)* category, const(char)* format, ...);							
-    alias da_purple_debug_warning = void function(const(char)* category, const(char)* format, ...);							
-    alias da_purple_debug_error = void function(const(char)* category, const(char)* format, ...);							
-    alias da_purple_debug_fatal = void function(const(char)* category, const(char)* format, ...);							
-    alias da_purple_debug_set_enabled = void function(gboolean enabled);													
-    alias da_purple_debug_is_enabled = gboolean function();																	
-    alias da_purple_debug_set_verbose = void function(gboolean verbose);													
-    alias da_purple_debug_is_verbose = gboolean function();																	
-    alias da_purple_debug_set_unsafe = void function(gboolean unsafe);														
-    alias da_purple_debug_is_unsafe = gboolean function();																	
-    alias da_purple_debug_set_ui_ops = void function(PurpleDebugUiOps* ops);												
-    alias da_purple_debug_get_ui_ops = PurpleDebugUiOps* function();														
-    alias da_purple_debug_init = void function();		
+    extern( C ) nothrow 
+    {
+	    void purple_debug(PurpleDebugLevel level, const(char)* category, const(char)* format, ...);
+        void purple_debug_misc(const(char)* category, const(char)* format, ...);
+        void purple_debug_info(const(char)* category, const(char)* format, ...);
+        void purple_debug_warning(const(char)* category, const(char)* format, ...);
+        void purple_debug_error(const(char)* category, const(char)* format, ...);
+        void purple_debug_fatal(const(char)* category, const(char)* format, ...);
+        void purple_debug_set_enabled(gboolean enabled);
+        gboolean purple_debug_is_enabled();
+        void purple_debug_set_verbose(gboolean verbose);
+        gboolean purple_debug_is_verbose();
+        void purple_debug_set_unsafe(gboolean unsafe);
+        gboolean purple_debug_is_unsafe();
+        void purple_debug_set_ui_ops(PurpleDebugUiOps* ops);
+        PurpleDebugUiOps* purple_debug_get_ui_ops();
+        void purple_debug_init();
+    }
 }
-
-__gshared
+else
 {
-	da_purple_debug purple_debug;
-	da_purple_debug_misc purple_debug_misc;
-	da_purple_debug_info purple_debug_info;
-	da_purple_debug_warning purple_debug_warning;
-	da_purple_debug_error purple_debug_error;
-	da_purple_debug_fatal purple_debug_fatal;
-	da_purple_debug_set_enabled purple_debug_set_enabled;
-	da_purple_debug_is_enabled purple_debug_is_enabled;
-	da_purple_debug_set_verbose purple_debug_set_verbose;
-	da_purple_debug_is_verbose purple_debug_is_verbose;
-	da_purple_debug_set_unsafe purple_debug_set_unsafe;
-	da_purple_debug_is_unsafe purple_debug_is_unsafe;
-	da_purple_debug_set_ui_ops purple_debug_set_ui_ops;
-	da_purple_debug_get_ui_ops purple_debug_get_ui_ops;
-	da_purple_debug_init purple_debug_init;
+    extern( C ) nothrow 
+    {
+	    alias da_purple_debug = void function(PurpleDebugLevel level, const(char)* category, const(char)* format, ...);			
+        alias da_purple_debug_misc = void function(const(char)* category, const(char)* format, ...);							
+        alias da_purple_debug_info = void function(const(char)* category, const(char)* format, ...);							
+        alias da_purple_debug_warning = void function(const(char)* category, const(char)* format, ...);							
+        alias da_purple_debug_error = void function(const(char)* category, const(char)* format, ...);							
+        alias da_purple_debug_fatal = void function(const(char)* category, const(char)* format, ...);							
+        alias da_purple_debug_set_enabled = void function(gboolean enabled);													
+        alias da_purple_debug_is_enabled = gboolean function();																	
+        alias da_purple_debug_set_verbose = void function(gboolean verbose);													
+        alias da_purple_debug_is_verbose = gboolean function();																	
+        alias da_purple_debug_set_unsafe = void function(gboolean unsafe);														
+        alias da_purple_debug_is_unsafe = gboolean function();																	
+        alias da_purple_debug_set_ui_ops = void function(PurpleDebugUiOps* ops);												
+        alias da_purple_debug_get_ui_ops = PurpleDebugUiOps* function();														
+        alias da_purple_debug_init = void function();		
+    }
+
+    __gshared
+    {
+	    da_purple_debug purple_debug;
+	    da_purple_debug_misc purple_debug_misc;
+	    da_purple_debug_info purple_debug_info;
+	    da_purple_debug_warning purple_debug_warning;
+	    da_purple_debug_error purple_debug_error;
+	    da_purple_debug_fatal purple_debug_fatal;
+	    da_purple_debug_set_enabled purple_debug_set_enabled;
+	    da_purple_debug_is_enabled purple_debug_is_enabled;
+	    da_purple_debug_set_verbose purple_debug_set_verbose;
+	    da_purple_debug_is_verbose purple_debug_is_verbose;
+	    da_purple_debug_set_unsafe purple_debug_set_unsafe;
+	    da_purple_debug_is_unsafe purple_debug_is_unsafe;
+	    da_purple_debug_set_ui_ops purple_debug_set_ui_ops;
+	    da_purple_debug_get_ui_ops purple_debug_get_ui_ops;
+	    da_purple_debug_init purple_debug_init;
+    }
 }

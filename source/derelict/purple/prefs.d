@@ -47,82 +47,127 @@ enum _PurplePrefType
 	PURPLE_PREF_PATH_LIST = 6
 }
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-	alias da_purple_prefs_get_handle = void* function();																						
-    alias da_purple_prefs_init = void function();																								
-    alias da_purple_prefs_uninit = void function();																								
-    alias da_purple_prefs_add_none = void function(const(char)* name);																			
-    alias da_purple_prefs_add_bool = void function(const(char)* name, gboolean value);															
-    alias da_purple_prefs_add_int = void function(const(char)* name, int value);																
-    alias da_purple_prefs_add_string = void function(const(char)* name, const(char)* value);													
-    alias da_purple_prefs_add_string_list = void function(const(char)* name, GList* value);														
-    alias da_purple_prefs_add_path = void function(const(char)* name, const(char)* value);														
-    alias da_purple_prefs_add_path_list = void function(const(char)* name, GList* value);														
-    alias da_purple_prefs_remove = void function(const(char)* name);																			
-    alias da_purple_prefs_rename = void function(const(char)* oldname, const(char)* newname);													
-    alias da_purple_prefs_rename_boolean_toggle = void function(const(char)* oldname, const(char)* newname);									
-    alias da_purple_prefs_destroy = void function();																							
-    alias da_purple_prefs_set_generic = void function(const(char)* name, gpointer value);														
-    alias da_purple_prefs_set_bool = void function(const(char)* name, gboolean value);															
-    alias da_purple_prefs_set_int = void function(const(char)* name, int value);																
-    alias da_purple_prefs_set_string = void function(const(char)* name, const(char)* value);													
-    alias da_purple_prefs_set_string_list = void function(const(char)* name, GList* value);														
-    alias da_purple_prefs_set_path = void function(const(char)* name, const(char)* value);														
-    alias da_purple_prefs_set_path_list = void function(const(char)* name, GList* value);														
-    alias da_purple_prefs_exists = gboolean function(const(char)* name);																		
-    alias da_purple_prefs_get_type = PurplePrefType function(const(char)* name);																
-    alias da_purple_prefs_get_bool = gboolean function(const(char)* name);																		
-    alias da_purple_prefs_get_int = int function(const(char)* name);																			
-    alias da_purple_prefs_get_string = const(char)* function(const(char)* name);																
-    alias da_purple_prefs_get_string_list = GList* function(const(char)* name);																	
-    alias da_purple_prefs_get_path = const(char)* function(const(char)* name);																	
-    alias da_purple_prefs_get_path_list = GList* function(const(char)* name);																	
-    alias da_purple_prefs_get_children_names = GList* function(const(char)* name);																
-    alias da_purple_prefs_connect_callback = guint function(void* handle, const(char)* name, PurplePrefCallback cb, gpointer data);				
-    alias da_purple_prefs_disconnect_callback = void function(guint callback_id);																
-    alias da_purple_prefs_disconnect_by_handle = void function(void* handle);																	
-    alias da_purple_prefs_trigger_callback = void function(const(char)* name);																	
-    alias da_purple_prefs_load = gboolean function();																							
-    alias da_purple_prefs_update_old = void function();	
+    extern( C ) nothrow 
+    {
+	    void* purple_prefs_get_handle();
+        void purple_prefs_init();
+        void purple_prefs_uninit();
+        void purple_prefs_add_none(const(char)* name);
+        void purple_prefs_add_bool(const(char)* name, gboolean value);
+        void purple_prefs_add_int(const(char)* name, int value);
+        void purple_prefs_add_string(const(char)* name, const(char)* value);
+        void purple_prefs_add_string_list(const(char)* name, GList* value);
+        void purple_prefs_add_path(const(char)* name, const(char)* value);
+        void purple_prefs_add_path_list(const(char)* name, GList* value);
+        void purple_prefs_remove(const(char)* name);
+        void purple_prefs_rename(const(char)* oldname, const(char)* newname);
+        void purple_prefs_rename_boolean_toggle(const(char)* oldname, const(char)* newname);
+        void purple_prefs_destroy();
+        void purple_prefs_set_generic(const(char)* name, gpointer value);
+        void purple_prefs_set_bool(const(char)* name, gboolean value);
+        void purple_prefs_set_int(const(char)* name, int value);
+        void purple_prefs_set_string(const(char)* name, const(char)* value);
+        void purple_prefs_set_string_list(const(char)* name, GList* value);
+        void purple_prefs_set_path(const(char)* name, const(char)* value);
+        void purple_prefs_set_path_list(const(char)* name, GList* value);
+        gboolean purple_prefs_exists(const(char)* name);
+        PurplePrefType purple_prefs_get_type(const(char)* name);
+        gboolean purple_prefs_get_bool(const(char)* name);
+        int purple_prefs_get_int(const(char)* name);
+        const(char)* purple_prefs_get_string(const(char)* name);
+        GList* purple_prefs_get_string_list(const(char)* name);
+        const(char)* purple_prefs_get_path(const(char)* name);
+        GList* purple_prefs_get_path_list(const(char)* name);
+        GList* purple_prefs_get_children_names(const(char)* name);
+        guint purple_prefs_connect_callback(void* handle, const(char)* name, PurplePrefCallback cb, gpointer data);
+        void purple_prefs_disconnect_callback(guint callback_id);
+        void purple_prefs_disconnect_by_handle(void* handle);
+        void purple_prefs_trigger_callback(const(char)* name);
+        gboolean purple_prefs_load();
+        void purple_prefs_update_old();
+    }
 }
-
-__gshared
+else
 {
-	da_purple_prefs_get_handle purple_prefs_get_handle;
-	da_purple_prefs_init purple_prefs_init;
-	da_purple_prefs_uninit purple_prefs_uninit;
-	da_purple_prefs_add_none purple_prefs_add_none;
-	da_purple_prefs_add_bool purple_prefs_add_bool;
-	da_purple_prefs_add_int purple_prefs_add_int;
-	da_purple_prefs_add_string purple_prefs_add_string;
-	da_purple_prefs_add_string_list purple_prefs_add_string_list;
-	da_purple_prefs_add_path purple_prefs_add_path;
-	da_purple_prefs_add_path_list purple_prefs_add_path_list;
-	da_purple_prefs_remove purple_prefs_remove;
-	da_purple_prefs_rename purple_prefs_rename;
-	da_purple_prefs_rename_boolean_toggle purple_prefs_rename_boolean_toggle;
-	da_purple_prefs_destroy purple_prefs_destroy;
-	da_purple_prefs_set_generic purple_prefs_set_generic;
-	da_purple_prefs_set_bool purple_prefs_set_bool;
-	da_purple_prefs_set_int purple_prefs_set_int;
-	da_purple_prefs_set_string purple_prefs_set_string;
-	da_purple_prefs_set_string_list purple_prefs_set_string_list;
-	da_purple_prefs_set_path purple_prefs_set_path;
-	da_purple_prefs_set_path_list purple_prefs_set_path_list;
-	da_purple_prefs_exists purple_prefs_exists;
-	da_purple_prefs_get_type purple_prefs_get_type;
-	da_purple_prefs_get_bool purple_prefs_get_bool;
-	da_purple_prefs_get_int purple_prefs_get_int;
-	da_purple_prefs_get_string purple_prefs_get_string;
-	da_purple_prefs_get_string_list purple_prefs_get_string_list;
-	da_purple_prefs_get_path purple_prefs_get_path;
-	da_purple_prefs_get_path_list purple_prefs_get_path_list;
-	da_purple_prefs_get_children_names purple_prefs_get_children_names;
-	da_purple_prefs_connect_callback purple_prefs_connect_callback;
-	da_purple_prefs_disconnect_callback purple_prefs_disconnect_callback;
-	da_purple_prefs_disconnect_by_handle purple_prefs_disconnect_by_handle;
-	da_purple_prefs_trigger_callback purple_prefs_trigger_callback;
-	da_purple_prefs_load purple_prefs_load;
-	da_purple_prefs_update_old purple_prefs_update_old;	
+    extern( C ) nothrow 
+    {
+	    alias da_purple_prefs_get_handle = void* function();																						
+        alias da_purple_prefs_init = void function();																								
+        alias da_purple_prefs_uninit = void function();																								
+        alias da_purple_prefs_add_none = void function(const(char)* name);																			
+        alias da_purple_prefs_add_bool = void function(const(char)* name, gboolean value);															
+        alias da_purple_prefs_add_int = void function(const(char)* name, int value);																
+        alias da_purple_prefs_add_string = void function(const(char)* name, const(char)* value);													
+        alias da_purple_prefs_add_string_list = void function(const(char)* name, GList* value);														
+        alias da_purple_prefs_add_path = void function(const(char)* name, const(char)* value);														
+        alias da_purple_prefs_add_path_list = void function(const(char)* name, GList* value);														
+        alias da_purple_prefs_remove = void function(const(char)* name);																			
+        alias da_purple_prefs_rename = void function(const(char)* oldname, const(char)* newname);													
+        alias da_purple_prefs_rename_boolean_toggle = void function(const(char)* oldname, const(char)* newname);									
+        alias da_purple_prefs_destroy = void function();																							
+        alias da_purple_prefs_set_generic = void function(const(char)* name, gpointer value);														
+        alias da_purple_prefs_set_bool = void function(const(char)* name, gboolean value);															
+        alias da_purple_prefs_set_int = void function(const(char)* name, int value);																
+        alias da_purple_prefs_set_string = void function(const(char)* name, const(char)* value);													
+        alias da_purple_prefs_set_string_list = void function(const(char)* name, GList* value);														
+        alias da_purple_prefs_set_path = void function(const(char)* name, const(char)* value);														
+        alias da_purple_prefs_set_path_list = void function(const(char)* name, GList* value);														
+        alias da_purple_prefs_exists = gboolean function(const(char)* name);																		
+        alias da_purple_prefs_get_type = PurplePrefType function(const(char)* name);																
+        alias da_purple_prefs_get_bool = gboolean function(const(char)* name);																		
+        alias da_purple_prefs_get_int = int function(const(char)* name);																			
+        alias da_purple_prefs_get_string = const(char)* function(const(char)* name);																
+        alias da_purple_prefs_get_string_list = GList* function(const(char)* name);																	
+        alias da_purple_prefs_get_path = const(char)* function(const(char)* name);																	
+        alias da_purple_prefs_get_path_list = GList* function(const(char)* name);																	
+        alias da_purple_prefs_get_children_names = GList* function(const(char)* name);																
+        alias da_purple_prefs_connect_callback = guint function(void* handle, const(char)* name, PurplePrefCallback cb, gpointer data);				
+        alias da_purple_prefs_disconnect_callback = void function(guint callback_id);																
+        alias da_purple_prefs_disconnect_by_handle = void function(void* handle);																	
+        alias da_purple_prefs_trigger_callback = void function(const(char)* name);																	
+        alias da_purple_prefs_load = gboolean function();																							
+        alias da_purple_prefs_update_old = void function();	
+    }
+
+    __gshared
+    {
+	    da_purple_prefs_get_handle purple_prefs_get_handle;
+	    da_purple_prefs_init purple_prefs_init;
+	    da_purple_prefs_uninit purple_prefs_uninit;
+	    da_purple_prefs_add_none purple_prefs_add_none;
+	    da_purple_prefs_add_bool purple_prefs_add_bool;
+	    da_purple_prefs_add_int purple_prefs_add_int;
+	    da_purple_prefs_add_string purple_prefs_add_string;
+	    da_purple_prefs_add_string_list purple_prefs_add_string_list;
+	    da_purple_prefs_add_path purple_prefs_add_path;
+	    da_purple_prefs_add_path_list purple_prefs_add_path_list;
+	    da_purple_prefs_remove purple_prefs_remove;
+	    da_purple_prefs_rename purple_prefs_rename;
+	    da_purple_prefs_rename_boolean_toggle purple_prefs_rename_boolean_toggle;
+	    da_purple_prefs_destroy purple_prefs_destroy;
+	    da_purple_prefs_set_generic purple_prefs_set_generic;
+	    da_purple_prefs_set_bool purple_prefs_set_bool;
+	    da_purple_prefs_set_int purple_prefs_set_int;
+	    da_purple_prefs_set_string purple_prefs_set_string;
+	    da_purple_prefs_set_string_list purple_prefs_set_string_list;
+	    da_purple_prefs_set_path purple_prefs_set_path;
+	    da_purple_prefs_set_path_list purple_prefs_set_path_list;
+	    da_purple_prefs_exists purple_prefs_exists;
+	    da_purple_prefs_get_type purple_prefs_get_type;
+	    da_purple_prefs_get_bool purple_prefs_get_bool;
+	    da_purple_prefs_get_int purple_prefs_get_int;
+	    da_purple_prefs_get_string purple_prefs_get_string;
+	    da_purple_prefs_get_string_list purple_prefs_get_string_list;
+	    da_purple_prefs_get_path purple_prefs_get_path;
+	    da_purple_prefs_get_path_list purple_prefs_get_path_list;
+	    da_purple_prefs_get_children_names purple_prefs_get_children_names;
+	    da_purple_prefs_connect_callback purple_prefs_connect_callback;
+	    da_purple_prefs_disconnect_callback purple_prefs_disconnect_callback;
+	    da_purple_prefs_disconnect_by_handle purple_prefs_disconnect_by_handle;
+	    da_purple_prefs_trigger_callback purple_prefs_trigger_callback;
+	    da_purple_prefs_load purple_prefs_load;
+	    da_purple_prefs_update_old purple_prefs_update_old;	
+    }
 }

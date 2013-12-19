@@ -44,46 +44,73 @@ struct _PurpleSmiley;
 struct _PurpleSmileyClass;
 
 
-extern( C ) nothrow 
+version(Derelict_Link_Static)
 {
-	alias da_purple_smiley_get_type = GType function();																		
-    alias da_purple_smiley_new = PurpleSmiley* function(PurpleStoredImage* img, const(char)* shortcut);						
-    alias da_purple_smiley_new_from_file = PurpleSmiley* function(const(char)* shortcut, const(char)* filepath);			
-    alias da_purple_smiley_delete = void function(PurpleSmiley* smiley);													
-    alias da_purple_smiley_set_shortcut = gboolean function(PurpleSmiley* smiley, const(char)* shortcut);					
-    alias da_purple_smiley_set_data = void function(PurpleSmiley* smiley, guchar* smiley_data, size_t smiley_data_len);		
-    alias da_purple_smiley_get_shortcut = const(char)* function(const(PurpleSmiley)* smiley);								
-    alias da_purple_smiley_get_checksum = const(char)* function(const(PurpleSmiley)* smiley);								
-    alias da_purple_smiley_get_stored_image = PurpleStoredImage* function(const(PurpleSmiley)* smiley);						
-    alias da_purple_smiley_get_data = gconstpointer function(const(PurpleSmiley)* smiley, size_t* len);						
-    alias da_purple_smiley_get_extension = const(char)* function(const(PurpleSmiley)* smiley);								
-    alias da_purple_smiley_get_full_path = char* function(PurpleSmiley* smiley);											
-    alias da_purple_smileys_get_all = GList* function();																	
-    alias da_purple_smileys_find_by_shortcut = PurpleSmiley* function(const(char)* shortcut);								
-    alias da_purple_smileys_find_by_checksum = PurpleSmiley* function(const(char)* checksum);								
-    alias da_purple_smileys_get_storing_dir = const(char)* function();														
-    alias da_purple_smileys_init = void function();																			
-    alias da_purple_smileys_uninit = void function();		
+    extern( C ) nothrow 
+    {
+	    GType purple_smiley_get_type();
+        PurpleSmiley* purple_smiley_new(PurpleStoredImage* img, const(char)* shortcut);
+        PurpleSmiley* purple_smiley_new_from_file(const(char)* shortcut, const(char)* filepath);
+        void purple_smiley_delete(PurpleSmiley* smiley);
+        gboolean purple_smiley_set_shortcut(PurpleSmiley* smiley, const(char)* shortcut);
+        void purple_smiley_set_data(PurpleSmiley* smiley, guchar* smiley_data, size_t smiley_data_len);
+        const(char)* purple_smiley_get_shortcut(const(PurpleSmiley)* smiley);
+        const(char)* purple_smiley_get_checksum(const(PurpleSmiley)* smiley);
+        PurpleStoredImage* purple_smiley_get_stored_image(const(PurpleSmiley)* smiley);
+        gconstpointer purple_smiley_get_data(const(PurpleSmiley)* smiley, size_t* len);
+        const(char)* purple_smiley_get_extension(const(PurpleSmiley)* smiley);
+        char* purple_smiley_get_full_path(PurpleSmiley* smiley);
+        GList* purple_smileys_get_all();
+        PurpleSmiley* purple_smileys_find_by_shortcut(const(char)* shortcut);
+        PurpleSmiley* purple_smileys_find_by_checksum(const(char)* checksum);
+        const(char)* purple_smileys_get_storing_dir();
+        void purple_smileys_init();
+        void purple_smileys_uninit();
+    }
 }
-
-__gshared
+else
 {
-	da_purple_smiley_get_type purple_smiley_get_type;
-	da_purple_smiley_new purple_smiley_new;
-	da_purple_smiley_new_from_file purple_smiley_new_from_file;
-	da_purple_smiley_delete purple_smiley_delete;
-	da_purple_smiley_set_shortcut purple_smiley_set_shortcut;
-	da_purple_smiley_set_data purple_smiley_set_data;
-	da_purple_smiley_get_shortcut purple_smiley_get_shortcut;
-	da_purple_smiley_get_checksum purple_smiley_get_checksum;
-	da_purple_smiley_get_stored_image purple_smiley_get_stored_image;
-	da_purple_smiley_get_data purple_smiley_get_data;
-	da_purple_smiley_get_extension purple_smiley_get_extension;
-	da_purple_smiley_get_full_path purple_smiley_get_full_path;
-	da_purple_smileys_get_all purple_smileys_get_all;
-	da_purple_smileys_find_by_shortcut purple_smileys_find_by_shortcut;
-	da_purple_smileys_find_by_checksum purple_smileys_find_by_checksum;
-	da_purple_smileys_get_storing_dir purple_smileys_get_storing_dir;
-	da_purple_smileys_init purple_smileys_init;
-	da_purple_smileys_uninit purple_smileys_uninit;
+    extern( C ) nothrow 
+    {
+	    alias da_purple_smiley_get_type = GType function();																		
+        alias da_purple_smiley_new = PurpleSmiley* function(PurpleStoredImage* img, const(char)* shortcut);						
+        alias da_purple_smiley_new_from_file = PurpleSmiley* function(const(char)* shortcut, const(char)* filepath);			
+        alias da_purple_smiley_delete = void function(PurpleSmiley* smiley);													
+        alias da_purple_smiley_set_shortcut = gboolean function(PurpleSmiley* smiley, const(char)* shortcut);					
+        alias da_purple_smiley_set_data = void function(PurpleSmiley* smiley, guchar* smiley_data, size_t smiley_data_len);		
+        alias da_purple_smiley_get_shortcut = const(char)* function(const(PurpleSmiley)* smiley);								
+        alias da_purple_smiley_get_checksum = const(char)* function(const(PurpleSmiley)* smiley);								
+        alias da_purple_smiley_get_stored_image = PurpleStoredImage* function(const(PurpleSmiley)* smiley);						
+        alias da_purple_smiley_get_data = gconstpointer function(const(PurpleSmiley)* smiley, size_t* len);						
+        alias da_purple_smiley_get_extension = const(char)* function(const(PurpleSmiley)* smiley);								
+        alias da_purple_smiley_get_full_path = char* function(PurpleSmiley* smiley);											
+        alias da_purple_smileys_get_all = GList* function();																	
+        alias da_purple_smileys_find_by_shortcut = PurpleSmiley* function(const(char)* shortcut);								
+        alias da_purple_smileys_find_by_checksum = PurpleSmiley* function(const(char)* checksum);								
+        alias da_purple_smileys_get_storing_dir = const(char)* function();														
+        alias da_purple_smileys_init = void function();																			
+        alias da_purple_smileys_uninit = void function();		
+    }
+
+    __gshared
+    {
+	    da_purple_smiley_get_type purple_smiley_get_type;
+	    da_purple_smiley_new purple_smiley_new;
+	    da_purple_smiley_new_from_file purple_smiley_new_from_file;
+	    da_purple_smiley_delete purple_smiley_delete;
+	    da_purple_smiley_set_shortcut purple_smiley_set_shortcut;
+	    da_purple_smiley_set_data purple_smiley_set_data;
+	    da_purple_smiley_get_shortcut purple_smiley_get_shortcut;
+	    da_purple_smiley_get_checksum purple_smiley_get_checksum;
+	    da_purple_smiley_get_stored_image purple_smiley_get_stored_image;
+	    da_purple_smiley_get_data purple_smiley_get_data;
+	    da_purple_smiley_get_extension purple_smiley_get_extension;
+	    da_purple_smiley_get_full_path purple_smiley_get_full_path;
+	    da_purple_smileys_get_all purple_smileys_get_all;
+	    da_purple_smileys_find_by_shortcut purple_smileys_find_by_shortcut;
+	    da_purple_smileys_find_by_checksum purple_smileys_find_by_checksum;
+	    da_purple_smileys_get_storing_dir purple_smileys_get_storing_dir;
+	    da_purple_smileys_init purple_smileys_init;
+	    da_purple_smileys_uninit purple_smileys_uninit;
+    }
 }
