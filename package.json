@@ -1,5 +1,5 @@
 {
-	"name": "derelict-purple",
+	"name": "derelict_extras-purple",
 	"description": "Dynamic bindings to (lib)purple for the D Programming Language.",
 	"homepage": "https://github.com/PaulFreund/DerelictPurple",
 	"license": "Boost",
