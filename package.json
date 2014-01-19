@@ -2,7 +2,7 @@
 	"name": "derelict_extras-purple",
 	"description": "Dynamic bindings to (lib)purple for the D Programming Language.",
 	"homepage": "https://github.com/PaulFreund/DerelictPurple",
-	"license": "Boost",
+	"license": "BSL-1.0",
 	"authors": [
 		"Paul Freund"
 	],
